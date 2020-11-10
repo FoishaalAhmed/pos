@@ -28,5 +28,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
 	Route::resource('/suppliers', 'SupplierController');
 	Route::resource('/categories', 'CategoryController');
 	Route::resource('/units', 'UnitController');
+	Route::resource('/products', 'ProductController');
 
 });
