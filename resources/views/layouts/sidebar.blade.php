@@ -39,8 +39,8 @@
                 </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="@if(Request::path() === 'admin/users/create') {{'active'}} @endif"><a href="{{route('users.create')}}"><i class="fa fa-circle-o"></i> Add User</a></li>
-                    <li class="@if(Request::path() === 'admin/users') {{'active'}} @endif"><a href="{{route('users.index')}}"><i class="fa fa-circle-o"></i> View User</a></li>
+                    <li class="@if(Request::path() === 'admin/users/create') {{'active'}} @endif"><a href="{{route('users.create')}}"><i class="fa fa-plus"></i> Add User</a></li>
+                    <li class="@if(Request::path() === 'admin/users') {{'active'}} @endif"><a href="{{route('users.index')}}"><i class="fa fa-list"></i> View User</a></li>
                 </ul>
             </li>
 
@@ -52,8 +52,8 @@
                 </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="@if(Request::path() === 'admin/customers/create') {{'active'}} @endif"><a href="{{route('customers.create')}}"><i class="fa fa-circle-o"></i> Add Customer</a></li>
-                    <li class="@if(Request::path() === 'admin/customers') {{'active'}} @endif"><a href="{{route('customers.index')}}"><i class="fa fa-circle-o"></i> View Customer</a></li>
+                    <li class="@if(Request::path() === 'admin/customers/create') {{'active'}} @endif"><a href="{{route('customers.create')}}"><i class="fa fa-plus"></i> Add Customer</a></li>
+                    <li class="@if(Request::path() === 'admin/customers') {{'active'}} @endif"><a href="{{route('customers.index')}}"><i class="fa fa-list"></i> View Customer</a></li>
                 </ul>
             </li>
 
@@ -65,22 +65,30 @@
                 </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="@if(Request::path() === 'admin/suppliers/create') {{'active'}} @endif"><a href="{{route('suppliers.create')}}"><i class="fa fa-circle-o"></i> Add Supplier</a></li>
-                    <li class="@if(Request::path() === 'admin/suppliers') {{'active'}} @endif"><a href="{{route('suppliers.index')}}"><i class="fa fa-circle-o"></i> View Supplier</a></li>
+                    <li class="@if(Request::path() === 'admin/suppliers/create') {{'active'}} @endif"><a href="{{route('suppliers.create')}}"><i class="fa fa-plus"></i> Add Supplier</a></li>
+                    <li class="@if(Request::path() === 'admin/suppliers') {{'active'}} @endif"><a href="{{route('suppliers.index')}}"><i class="fa fa-list"></i> View Supplier</a></li>
                 </ul>
             </li>
 
-            <li class="@if(Request::path() === 'admin/categories') {{'active'}} @endif">
-                <a href="{{route('categories.index')}}">
-                <i class="fa fa-tag"></i> <span>Categories</span>
+            <li class="treeview @if(Request::path() === 'admin/products/create' || Request::path() === 'admin/products' || Request::path() === 'admin/categories' || Request::path() === 'admin/units' || request()->is('admin/products/*/edit')) {{'active'}} @endif">
+                <a href="#">
+                <i class="fa fa-product-hunt"></i> <span>Products</span>
+                <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+                </span>
                 </a>
+                <ul class="treeview-menu">
+                    <li class="@if(Request::path() === 'admin/products/create') {{'active'}} @endif"><a href="{{route('products.create')}}"><i class="fa fa-plus"></i> Add Product</a></li>
+
+                    <li class="@if(Request::path() === 'admin/products') {{'active'}} @endif"><a href="{{route('products.index')}}"><i class="fa fa-list"></i> View Product</a></li>
+
+                    <li class="@if(Request::path() === 'admin/categories') {{'active'}} @endif"><a href="{{route('categories.index')}}"><i class="fa fa-tag"></i> <span>Categories</span></a></li>
+
+                    <li class="@if(Request::path() === 'admin/units') {{'active'}} @endif"><a href="{{route('units.index')}}"><i class="fa fa-balance-scale"></i> <span>Units</span></a></li>
+                </ul>
             </li>
 
-            <li class="@if(Request::path() === 'admin/units') {{'active'}} @endif">
-                <a href="{{route('units.index')}}">
-                <i class="fa fa-balance-scale"></i> <span>Units</span>
-                </a>
-            </li>
+            
       </ul>
     </section>
     <!-- /.sidebar -->

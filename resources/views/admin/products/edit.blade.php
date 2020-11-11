@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Supplier update')
+@section('title', 'Product update')
 @section('content')
 <div class="content-wrapper">
     <section class="content-header">
@@ -8,84 +8,110 @@
             <small>Version 2.0</small>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="{{route('suppliers.index')}}"><i class="fa fa-group"></i> Suppliers</a></li>
-            <li class="active">Supplier Update</li>
+            <li><a href="{{route('products.index')}}"><i class="fa fa-group"></i> Products</a></li>
+            <li class="active">Product update</li>
         </ol>
     </section>
     <div class="content">
         <div class="row">
             <div class="col-md-12">
-                <!-- Content Header (supplier header) -->
-                <div class="box box-danger box-solid">
+                <!-- Content Header (product header) -->
+                <div class="box box-teal box-solid">
                     <div class="box-header with-border">
-                        <h3 class="box-title">New supplier</h3>
+                        <h3 class="box-title">Product update</h3>
                         <div class="box-tools pull-right">
-                            <a href="{{route('suppliers.index')}}" class="btn btn-sm bg-green"><i class="fa fa-list"></i> Supplier list</a>
+                            <a href="{{route('products.index')}}" class="btn btn-sm bg-green"><i class="fa fa-list"></i> Product list</a>
                         </div>      
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
                         <br>
                         @include('includes.errormessage')
-                        <form action="{{route('suppliers.update',$supplier_info->id)}}" method="POST" class="form-horizontal" enctype="multipart/form-data">
+                        <form action="{{route('products.update', $product->id)}}" method="POST" class="form-horizontal" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
-                            <div class="form-group">
-                                <label class="control-label col-md-2">Name</label>
-                                <div class="col-sm-9">
-                                    <input name="name" placeholder="name" class="form-control" required="" type="text" value="{{ $supplier_info->name }}">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label class="control-label col-md-2">Name</label>
+                                        <div class="col-sm-10">
+                                            <input name="name" placeholder="name" class="form-control" required="" type="text" value="{{ $product->name }}">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-2">E-mail Address</label>
-                                <div class="col-sm-9">
-                                    <input type="email" class="form-control" placeholder="E-mail Address" name="email" value="{{$supplier_info->email}}" required="">
-                                    
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label class="control-label col-md-2">Category</label>
+                                        <div class="col-sm-10">
+                                            <select name="category_id" class="form-control select2" style="width: 100%;" id="">
+                                                @foreach ($categories as $key => $category)
+                                                    <option value="{{$category->id}}" {{ $product->category_id == $category->id ? 'selected' : '' }}>{{$category->name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-2">Phone</label>
-                                <div class="col-sm-9">
-                                    <input name="phone" placeholder="Phone" class="form-control" required="" type="text" value="{{ $supplier_info->phone }}" required="">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label class="control-label col-md-2">Buy</label>
+                                        <div class="col-sm-10">
+                                            <input name="buy_price" placeholder="Buy Price" class="form-control" required="" type="number" value="{{ $product->buy_price }}">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-2">Area</label>
-                                <div class="col-sm-9">
-                                    <input name="area" placeholder="area" class="form-control" required="" type="text" value="{{ $supplier_info->area }}" required="">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label class="control-label col-md-2">Sell</label>
+                                        <div class="col-sm-10">
+                                            <input name="sell_price" placeholder="Sell Price" class="form-control" required="" type="number" value="{{ $product->sell_price }}">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-2">Address</label>
-                                <div class="col-sm-9">
-                                    <textarea name="address" rows="3" class="form-control" placeholder="Address" style="resize: vertical;" required="">{{$supplier_info->address}}</textarea>
-                                    
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label class="control-label col-md-2">Vat</label>
+                                        <div class="col-sm-10">
+                                            <input name="vat" placeholder="Vat Percentage" class="form-control" required="" type="text" value="{{ $product->vat }}">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-2">Company</label>
-                                <div class="col-sm-9">
-                                    <input name="company" placeholder="Company" class="form-control" required="" type="text" value="{{ $supplier_info->company }}" required="">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label class="control-label col-md-2">Photo</label>
+                                        <div class="col-sm-10">
+                                            <input type="file" name="photo" onchange="readPicture(this)">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-2">Company phone</label>
-                                <div class="col-sm-9">
-                                    <input name="company_phone" placeholder="Company phone" class="form-control" required="" type="text" value="{{ $supplier_info->company_phone }}" required="">
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label class="control-label col-md-1">Description</label>
+                                        <div class="col-sm-11">
+                                            <textarea name="description" placeholder="Product Description" class="form-control" id="" rows="5">{{ $product->description }}</textarea>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-2">Photo</label>
-                                <div class="col-sm-9">
-                                    <input type="file" name="photo" onchange="readPicture(this)">
-                                </div>
-                            </div>
+                            
                             <div class="col-md-12">
                                 <center>
-                                    <img src="{{asset($supplier_info->photo)}}" alt="supplier Photo" id="supplier_photo" style="width: 200px; height: 200px;">
+                                    <img src="{{ asset($product->photo) }}" alt="product Photo" id="product_photo" style="width: 200px; height: 200px;">
                                     <br> <br>
                                     <button type="reset" class="btn btn-sm bg-red">Reset</button>
-                                    <button type="submit" class="btn btn-sm bg-green">Save</button>
+                                    <button type="submit" class="btn btn-sm bg-teal">Save</button>
                                 </center>
                             </div>
                         </form>
@@ -105,7 +131,7 @@
           var reader = new FileReader();
     
           reader.onload = function (e) {
-            $('#supplier_photo')
+            $('#product_photo')
             .attr('src', e.target.result)
             .width(200)
             .height(200);

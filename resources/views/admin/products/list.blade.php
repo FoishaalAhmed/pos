@@ -48,7 +48,9 @@
                                     <td>{{$product->sell_price}}</td>
                                     <td>{{$product->vat}}</td>
                                     <td>{{$product->description}}</td>
-                                    <td>{{$product->photo}} </td>
+                                    <td>
+                                        <img src="{{asset($product->photo)}}" alt="" style="width: 50px; width: 50px;"> 
+                                    </td>
                                     <td>
                                     	<a class="btn btn-sm btn-success" href="{{route('products.edit',$product->id)}}"><span class="glyphicon glyphicon-edit"></span></a>
 

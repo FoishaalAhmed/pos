@@ -50,7 +50,11 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validateData = $request->validate(Product::$validateStoreRule);
+
+        $this->product_object->store_product($request);
+
+        return redirect()->back();
     }
 
     /**
@@ -61,7 +65,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        abort(404);
     }
 
     /**
@@ -72,7 +76,9 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        $categories = Category::select('id','name')->orderBy('priority', 'DESC')->get();
+        return view('admin.products.edit', compact('product', 'categories'));
     }
 
     /**
@@ -84,7 +90,11 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validateData = $request->validate(Product::$validateUpdateRule);
+
+        $this->product_object->update_product($request, $id);
+
+        return redirect()->back();
     }
 
     /**
@@ -95,6 +105,8 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->product_object->delete_product($id);
+
+        return redirect()->back();
     }
 }
