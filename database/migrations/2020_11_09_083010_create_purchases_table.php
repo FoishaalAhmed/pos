@@ -19,7 +19,7 @@ class CreatePurchasesTable extends Migration
             $table->string('invoice', 50);
             $table->bigInteger('user_id');
             $table->bigInteger('supplier_id');
-            $table->integer('subtotal');
+            $table->float('subtotal', 11, 2);
             $table->integer('vat_percentage')->nullable();
             $table->float('vat', 11, 2)->nullable();
             $table->integer('extra_cost')->nullable();

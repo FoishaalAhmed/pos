@@ -45,12 +45,13 @@
 
 <script src="{{asset('public/assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('public/assets/plugins/datatables/dataTables.bootstrap.min.js')}}"></script>
+ <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script>
 	$(".select2").select2();
 	$(function () {
     	$("#example1").DataTable();
-    	CKEDITOR.replace('editor1');
+    	//CKEDITOR.replace('editor1');
   	});
 </script>
 

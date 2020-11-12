@@ -5,7 +5,6 @@
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
   <link rel="stylesheet" href="{{asset('public/assets/bootstrap/css/bootstrap.min.css')}}">
-  <link rel="stylesheet" href="{{asset('public/assets/bootstrap/css/style.css')}}">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
   <!-- Ionicons -->
@@ -31,6 +30,11 @@
   <link rel="stylesheet" href="{{asset('public/assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">
   
  <link rel="stylesheet" href="{{asset('public/assets/plugins/datatables/dataTables.bootstrap.css')}}">
+
+ 
+  <link rel="stylesheet" href="{{asset('public/assets/bootstrap/css/style.css')}}">
+
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
   <!-- jQuery 2.2.3 -->
 <script src="{{asset('public/assets/plugins/jQuery/jquery-2.2.3.min.js')}}"></script>
