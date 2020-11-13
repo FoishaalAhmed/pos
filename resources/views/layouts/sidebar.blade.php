@@ -33,6 +33,32 @@
                 </ul>
             </li>
 
+            <li class="treeview @if(Request::path() === 'admin/purchases/create' || Request::path() === 'admin/purchases' || request()->is('admin/purchases/*')) {{'active'}} @endif">
+                <a href="#">
+                <i class="fa fa-shopping-cart"></i> <span>Purchases</span>
+                <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+                </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="@if(Request::path() === 'admin/purchases/create') {{'active'}} @endif"><a href="{{route('purchases.create')}}"><i class="fa fa-plus"></i> New Purchase</a></li>
+                    <li class="@if(Request::path() === 'admin/purchases') {{'active'}} @endif"><a href="{{route('purchases.index')}}"><i class="fa fa-list"></i> View Purchase</a></li>
+                </ul>
+            </li>
+
+            <li class="treeview @if(Request::path() === 'admin/sales/create' || Request::path() === 'admin/sales' || request()->is('admin/sales/*')) {{'active'}} @endif">
+                <a href="#">
+                <i class="fa fa-exchange"></i> <span>sales</span>
+                <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+                </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="@if(Request::path() === 'admin/sales/create') {{'active'}} @endif"><a href="{{route('sales.create')}}"><i class="fa fa-plus"></i> New Sale</a></li>
+                    <li class="@if(Request::path() === 'admin/sales') {{'active'}} @endif"><a href="{{route('sales.index')}}"><i class="fa fa-list"></i> View Sale</a></li>
+                </ul>
+            </li>
+
             <li class="treeview @if(Request::path() === 'admin/customers/create' || Request::path() === 'admin/customers' || request()->is('admin/customers/*/edit')) {{'active'}} @endif">
                 <a href="#">
                 <i class="fa fa-user"></i> <span>Customers</span>

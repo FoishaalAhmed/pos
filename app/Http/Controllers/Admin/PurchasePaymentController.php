@@ -3,31 +3,19 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Model\Product;
-use App\Model\Purchase;
-use App\Model\Purchase_detail;
 use App\Model\Purchase_payment;
-use App\Model\Supplier;
-use App\Model\Unit;
-use App\User;
 use Illuminate\Http\Request;
 
-class PurchaseController extends Controller
+class PurchasePaymentController extends Controller
 {
-
-    private $purchase_object;
-    private $purchase_datil_object;
     private $purchase_payment_object;
 
     public function __construct()
     {
-        $this->purchase_object         = new Purchase;
-        $this->purchase_datil_object   = new Purchase_detail;
         $this->purchase_payment_object = new Purchase_payment;
         $this->middleware('auth');
         $this->middleware('admin');
     }
-
     /**
      * Display a listing of the resource.
      *
@@ -35,9 +23,7 @@ class PurchaseController extends Controller
      */
     public function index()
     {
-        $purchases = $this->purchase_object->get_purchases();
-
-        return view('admin.purchase.list', compact('purchases'));
+        //
     }
 
     /**
@@ -47,12 +33,7 @@ class PurchaseController extends Controller
      */
     public function create()
     {
-        $products  = Product::select('id','name')->get();
-        $users     = User::select('id','name')->get();
-        $suppliers = Supplier::select('id','name')->get();
-        $units     = Unit::select('value','name')->get();
-
-        return view('admin.purchase.add', compact('products', 'users', 'suppliers', 'units'));
+        //
     }
 
     /**
@@ -63,9 +44,9 @@ class PurchaseController extends Controller
      */
     public function store(Request $request)
     {
-        $validateData = $request->validate(Purchase::$validateStoreRule);
+        $validateData = $request->validate(Purchase_payment::$validateStoreRule);
 
-        $this->purchase_object->store_purchase($request);
+        $this->purchase_payment_object->store_purchase_payment($request);
 
         return redirect()->back();
     }
@@ -78,20 +59,7 @@ class PurchaseController extends Controller
      */
     public function show($id)
     {
-        $purchase = Purchase::findOrFail($id);
-
-        if ($purchase) {
-
-            $user_info     = User::findOrFail($purchase->user_id);
-            $supplier_info = Supplier::findOrFail($purchase->supplier_id);
-
-            $purchase_details = $this->purchase_datil_object->get_purchase_detail_by_purchase_id($id);
-            $purchase_payment = $this->purchase_payment_object->get_purchase_payment_by_purchase_id($id);
-
-            return view('admin.purchase.view', compact('purchase', 'user_info', 'supplier_info', 'purchase_details', 'purchase_payment'));
-            
-        }
-
+        //
     }
 
     /**
@@ -102,7 +70,7 @@ class PurchaseController extends Controller
      */
     public function edit($id)
     {
-        abort(404);
+        //
     }
 
     /**
@@ -114,7 +82,7 @@ class PurchaseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        abort(404);
+        //
     }
 
     /**
@@ -125,8 +93,6 @@ class PurchaseController extends Controller
      */
     public function destroy($id)
     {
-        $this->purchase_object->delete_purchase($id);
-
-        return redirect()->back();
+        //
     }
 }

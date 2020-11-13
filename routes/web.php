@@ -30,6 +30,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
 	Route::resource('/units', 'UnitController');
 	Route::resource('/products', 'ProductController');
 	Route::resource('/purchases', 'PurchaseController');
+	Route::resource('/purchase-payments', 'PurchasePaymentController');
+	Route::resource('/sales', 'SaleController');
+	Route::resource('/sale-payments', 'SalePaymentController');
 	Route::post('/cart', 'CartController@cart')->name('add.cart');
 	Route::post('/cart-subtotal', 'CartController@subtotal')->name('cart.subtotal');
 

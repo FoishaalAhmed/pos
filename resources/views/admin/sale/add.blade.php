@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'New purchase add')
+@section('title', 'New sale add')
 @section('content')
 <div class="content-wrapper">
     <section class="content-header">
@@ -8,33 +8,33 @@
             <small>Version 2.0</small>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="{{route('purchases.index')}}"><i class="fa fa-group"></i> Purchases</a></li>
-            <li class="active">New purchase</li>
+            <li><a href="{{route('sales.index')}}"><i class="fa fa-group"></i> Sales</a></li>
+            <li class="active">New sale</li>
         </ol>
     </section>
     <div class="content">
         <div class="row">
             <div class="col-md-12">
-                <!-- Content Header (purchase header) -->
+                <!-- Content Header (sale header) -->
                 <div class="box box-purple box-solid">
                     <div class="box-header with-border">
-                        <h3 class="box-title">New purchase</h3>
+                        <h3 class="box-title">New sale</h3>
                         <div class="box-tools pull-right">
-                        	<a href="{{route('purchases.index')}}" class="btn btn-sm bg-green"><i class="fa fa-list"></i> purchase list</a>
+                        	<a href="{{route('sales.index')}}" class="btn btn-sm bg-green"><i class="fa fa-list"></i> Sale list</a>
                         </div>		
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
                         <br>
                     	@include('includes.errormessage')
-                    	<form action="{{route('purchases.store')}}" method="POST" class="form-horizontal" enctype="multipart/form-data">
+                    	<form action="{{route('sales.store')}}" method="POST" class="form-horizontal" enctype="multipart/form-data">
                     		@csrf
                             <div class="col-md-9">
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <div class="col-md-12">
                                             <label for="">Date</label>
-                                            <input type="text" name="date" class="form-control" id="date" placeholder="purchase date" required="" value="{{date('d-m-Y')}}">
+                                            <input type="text" name="date" class="form-control" id="date" placeholder="sale date" required="" value="{{date('d-m-Y')}}">
                                         </div>
                                     </div>
                                 </div>
@@ -42,7 +42,7 @@
                                     <div class="form-group">
                                         <div class="col-md-12">
                                             <label for="">Invoice</label>
-                                            <input type="text" name="invoice" class="form-control" id="invoice" placeholder="purchase invoice" value="{{date('Y-m-d-H-i-s')}}" readonly="">
+                                            <input type="text" name="invoice" class="form-control" id="invoice" placeholder="sale invoice" value="{{date('Y-m-d-H-i-s')}}" readonly="">
                                         </div>
                                     </div>
                                 </div>
@@ -62,11 +62,11 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <div class="col-md-12">
-                                            <label for="">Supplier</label>
-                                            <select name="supplier_id" id="" class="form-control select2" style="width: 100%" required="">
-                                                <option value="">Select Supplier</option>
-                                                @foreach ($suppliers as $key => $supplier)
-                                                    <option value="{{$supplier->id}}">{{$supplier->name}}</option>
+                                            <label for="">Customer</label>
+                                            <select name="customer_id" id="" class="form-control select2" style="width: 100%" required="">
+                                                <option value="">Select customer</option>
+                                                @foreach ($customers as $key => $customer)
+                                                    <option value="{{$customer->id}}">{{$customer->name}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -97,7 +97,7 @@
                                     <div class="form-group">
                                         <div class="col-md-12">
                                             <label for="">Quantity</label>
-                                            <input type="number" class="form-control" id="quantity" placeholder="purchase quantity" required="">
+                                            <input type="number" class="form-control" id="quantity" placeholder="sale quantity" required="">
                                         </div>
                                     </div>
                                 </div>
@@ -105,7 +105,7 @@
                                     <div class="form-group">
                                         <div class="col-md-12">
                                             <label for="">Rate</label>
-                                            <input type="text" class="form-control" id="rate" placeholder="purchase rate" required="">
+                                            <input type="text" class="form-control" id="rate" placeholder="sale rate" required="">
                                         </div>
                                     </div>
                                 </div>
@@ -113,7 +113,7 @@
                                     <div class="form-group">
                                         <div class="col-md-12">
                                             <label for="">Total</label>
-                                            <input type="text" class="form-control" id="total" placeholder="purchase total" required="">
+                                            <input type="text" class="form-control" id="total" placeholder="sale total" required="">
                                         </div>
                                     </div>
                                 </div>

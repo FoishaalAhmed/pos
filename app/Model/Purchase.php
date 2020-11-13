@@ -6,12 +6,15 @@ use App\Model\Purchase_detail;
 use App\Model\Purchase_payment;
 use Cart;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
 use Session;
 
 
 class Purchase extends Model
 {
+    use SoftDeletes;
+
     protected $fillable = [
 
     	'date', 'invoice', 'user_id','supplier_id', 'subtotal', 'vat_percentage','vat', 'extra_cost', 'discount_percentage','discount', 'total', 'note',
@@ -39,6 +42,7 @@ class Purchase extends Model
     	$purchases = DB::table('purchases')
                      ->leftJoin('suppliers', 'purchases.supplier_id', '=', 'suppliers.id')
                      ->leftJoin('users', 'purchases.user_id', '=', 'users.id')
+                     ->where('purchases.deleted_at', '=', NULL)
                      ->select('purchases.id','purchases.date','purchases.subtotal','purchases.total','purchases.note','users.name as user', 'suppliers.name as supplier')
                      ->get();
 
@@ -108,11 +112,27 @@ class Purchase extends Model
 
         if ($purchases) {
 
-            Session::flash('message', 'New Products Created Successfully!');
+            Session::flash('message', 'New Purchase Created Successfully!');
 
         } else {
 
-            Session::flash('message', 'Products Create Failed!');
+            Session::flash('message', 'Purchase Create Failed!');
         }
+    }
+
+    public function delete_purchase($id)
+    {
+
+        $purchase_delete = $this::where('id', $id)->delete();
+
+        if ($purchase_delete) {
+
+            Session::flash('message', 'Purchase Deleted Successfully!');
+
+        } else {
+
+            Session::flash('message', 'Purchase Delete Failed!');
+        }
+        
     }
 }

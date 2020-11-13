@@ -3,27 +3,26 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Model\Customer;
 use App\Model\Product;
-use App\Model\Purchase;
-use App\Model\Purchase_detail;
-use App\Model\Purchase_payment;
-use App\Model\Supplier;
-use App\Model\Unit;
+use App\Model\Sale;
+use App\Model\Sale_detail;
+use App\Model\Sale_payment;
 use App\User;
 use Illuminate\Http\Request;
 
-class PurchaseController extends Controller
+class SaleController extends Controller
 {
 
-    private $purchase_object;
-    private $purchase_datil_object;
-    private $purchase_payment_object;
+    private $sale_object;
+    private $sale_datil_object;
+    private $sale_payment_object;
 
     public function __construct()
     {
-        $this->purchase_object         = new Purchase;
-        $this->purchase_datil_object   = new Purchase_detail;
-        $this->purchase_payment_object = new Purchase_payment;
+        $this->sale_object         = new Sale;
+        $this->sale_datil_object   = new Sale_detail;
+        $this->sale_payment_object = new Sale_payment;
         $this->middleware('auth');
         $this->middleware('admin');
     }
@@ -35,9 +34,9 @@ class PurchaseController extends Controller
      */
     public function index()
     {
-        $purchases = $this->purchase_object->get_purchases();
+        $sales = $this->sale_object->get_sales();
 
-        return view('admin.purchase.list', compact('purchases'));
+        return view('admin.sale.list', compact('sales'));
     }
 
     /**
@@ -49,10 +48,9 @@ class PurchaseController extends Controller
     {
         $products  = Product::select('id','name')->get();
         $users     = User::select('id','name')->get();
-        $suppliers = Supplier::select('id','name')->get();
-        $units     = Unit::select('value','name')->get();
+        $customers = Customer::select('id','name')->get();
 
-        return view('admin.purchase.add', compact('products', 'users', 'suppliers', 'units'));
+        return view('admin.sale.add', compact('products', 'users', 'customers'));
     }
 
     /**
@@ -63,9 +61,9 @@ class PurchaseController extends Controller
      */
     public function store(Request $request)
     {
-        $validateData = $request->validate(Purchase::$validateStoreRule);
+        $validateData = $request->validate(Sale::$validateStoreRule);
 
-        $this->purchase_object->store_purchase($request);
+        $this->sale_object->store_sale($request);
 
         return redirect()->back();
     }
@@ -78,17 +76,17 @@ class PurchaseController extends Controller
      */
     public function show($id)
     {
-        $purchase = Purchase::findOrFail($id);
+        $sale = Sale::findOrFail($id);
 
-        if ($purchase) {
+        if ($sale) {
 
-            $user_info     = User::findOrFail($purchase->user_id);
-            $supplier_info = Supplier::findOrFail($purchase->supplier_id);
+            $user_info     = User::findOrFail($sale->user_id);
+            $customer_info = Customer::findOrFail($sale->customer_id);
 
-            $purchase_details = $this->purchase_datil_object->get_purchase_detail_by_purchase_id($id);
-            $purchase_payment = $this->purchase_payment_object->get_purchase_payment_by_purchase_id($id);
+            $sale_details = $this->sale_datil_object->get_sale_detail_by_sale_id($id);
+            $sale_payment = $this->sale_payment_object->get_sale_payment_by_sale_id($id);
 
-            return view('admin.purchase.view', compact('purchase', 'user_info', 'supplier_info', 'purchase_details', 'purchase_payment'));
+            return view('admin.sale.view', compact('sale', 'user_info', 'customer_info', 'sale_details', 'sale_payment'));
             
         }
 
@@ -125,7 +123,7 @@ class PurchaseController extends Controller
      */
     public function destroy($id)
     {
-        $this->purchase_object->delete_purchase($id);
+        $this->sale_object->delete_sale($id);
 
         return redirect()->back();
     }
