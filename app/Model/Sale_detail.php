@@ -19,4 +19,14 @@ class Sale_detail extends Model
                      ->get();
         return $sale_details;
     }
+
+    public function get_sale_quantity()
+    {
+        $sales = DB::table('sale_details')
+                     ->groupBy('sale_details.product_id')
+                     ->select('sale_details.id', DB::raw('SUM(sale_details.quantity) as sale_quantity'))
+                     ->get();
+
+        return $sales;
+    }
 }

@@ -50,7 +50,7 @@
                                     <td>{{$purchase->total}}</td>
                                     <td>{{$purchase->note}}</td>
                                     <td>
-                                    	<a class="btn btn-sm btn-success" href="{{route('purchases.show',$purchase->id)}}"><span class="fa fa-eye"></span></a>
+                                    	<a class="btn btn-sm bg-purple" href="{{route('purchases.show',$purchase->id)}}"><span class="fa fa-eye"></span></a>
 
                                     	<form action="{{route('purchases.destroy',$purchase->id)}}" method="post" style="display: none;" id="delete-form-{{$purchase->id}}">
                                             @csrf

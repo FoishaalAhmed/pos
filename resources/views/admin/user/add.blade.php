@@ -80,7 +80,8 @@
                                 <div class="col-sm-9">
                                     <select name="role_id" class="form-control select2" id="" style="width: 100%;"> 
                                         @foreach ($roles as $key => $role)
-                                            <option value="{{$role->id}}">{{$role->name}}</option>
+                                            <option value="{{$role->id}}" @if (old('role_id') == $role->id) {{'selected'}}
+                                            @endif >{{$role->name}}</option>
                                         @endforeach
                                     </select>
                                     

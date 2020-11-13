@@ -35,5 +35,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
 	Route::resource('/sale-payments', 'SalePaymentController');
 	Route::post('/cart', 'CartController@cart')->name('add.cart');
 	Route::post('/cart-subtotal', 'CartController@subtotal')->name('cart.subtotal');
+	Route::get('/stocks', 'StockController@index')->name('product.stock');
 
 });

@@ -7,7 +7,7 @@ use App\Model\Purchase_payment;
 use Cart;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\DB;
+use DB;
 use Session;
 
 

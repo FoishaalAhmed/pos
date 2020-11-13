@@ -46,6 +46,17 @@ class Sale_payment extends Model
         return $sale_payment;
     }
 
+    public function get_sale_payments()
+    {
+        $sale_payment = DB::table('sale_payments')
+                            ->leftJoin('customers', 'sale_payments.customer_id', '=', 'customers.id')
+                            ->leftJoin('users', 'sale_payments.user_id', '=', 'users.id')
+                            ->select('sale_payments.*','users.name as user', 'customers.name as customer')
+                                ->get();
+
+        return $sale_payment;
+    }
+
     public function store_sale_payment($request)
     {
     	
@@ -67,6 +78,44 @@ class Sale_payment extends Model
         } else {
 
             Session::flash('message', 'Sale Payment Failed!');
+        }
+    }
+
+    public function update_sale_payment($request, $id)
+    {
+        $sale_payment                 = $this::findOrFail($id);
+        $sale_payment->date           = date('Y-m-d', strtotime($request->date));
+        $sale_payment->sale_id        = $request->sale_id;
+        $sale_payment->invoice        = $request->invoice;
+        $sale_payment->paid           = $request->paid;
+        $sale_payment->due            = $request->due;
+        $sale_payment->user_id        = $request->user_id;
+        $sale_payment->customer_id    = $request->customer_id;
+        $sale_payment->payment_method = 1;
+
+        $sale_payment_update = $sale_payment->save();
+
+        if ($sale_payment_update) {
+
+            Session::flash('message', 'Sale Payment Update Successfully!');
+
+        } else {
+
+            Session::flash('message', 'Sale Payment Update Failed!');
+        }
+    }
+
+    public function delete_sale_payment($id)
+    {
+        $sale_payment_delete = $this::where('id', $id)->delete();
+
+        if ($sale_payment_delete) {
+
+            Session::flash('message', 'Sale Payment Deleted Successfully!');
+
+        } else {
+
+            Session::flash('message', 'Sale Payment Delete Failed!');
         }
     }
 }

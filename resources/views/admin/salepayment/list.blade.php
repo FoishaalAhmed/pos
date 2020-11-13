@@ -1,14 +1,17 @@
 @extends('layouts.app')
-@section('title', 'Sale List')
+
+@section('title', 'Sale payment list')
+
 @section('content')
-<div class="content-wrapper">
+	<div class="content-wrapper">
     <section class="content-header">
         <h1>
             Dashboard
             <small>Version 2.0</small>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="{{route('sales.index')}}"><i class="fa fa-group"></i> Sales</a></li>
+            <li><a href="{{route('sales.index')}}"><i class="fa fa-shopping-cart"></i> Sales</a></li>
+            <li><a href="{{route('sale-payments.index')}}"><i class="fa fa-money"></i> Sale payments</a></li>
             <li class="active">List</li>
         </ol>
     </section>
@@ -18,9 +21,9 @@
                 <!-- Content Header (user header) -->
                 <div class="box box-6a8d9d box-solid">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Sale list</h3>
+                        <h3 class="box-title">Sale payments list</h3>
                         <div class="box-tools pull-right">
-                        	<a href="{{route('sales.create')}}" class="btn btn-sm bg-purple"><i class="fa fa-plus"></i> New sale</a>
+                        	<a href="{{route('sale-payments.create')}}" class="btn btn-sm bg-purple"><i class="fa fa-plus"></i> New sale payments</a>
                         </div>		
                     </div>
                     <!-- /.box-header -->
@@ -33,32 +36,30 @@
                                     <th style="width: 15%;">Date</th>
                                     <th style="width: 10%;">Customer</th>
                                     <th style="width: 15%;">User</th>
-                                    <th style="width: 15%;">Subtotal</th>
-                                    <th style="width: 10%;">Total</th>
-                                    <th style="width: 20%;">Note</th>
+                                    <th style="width: 15%;">Paid</th>
+                                    <th style="width: 10%;">Due</th>
                                     <th style="width: 10%;">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($sales as $key => $sale)
+                                @foreach ($sale_payments as $key => $payment)
                                 <tr>
                                     <td>{{$loop->index + 1}}</td>
-                                    <td>{{$sale->date}}</td>
-                                    <td>{{$sale->customer}}</td>
-                                    <td>{{$sale->user}}</td>
-                                    <td>{{$sale->subtotal}}</td>
-                                    <td>{{$sale->total}}</td>
-                                    <td>{{$sale->note}}</td>
+                                    <td>{{date('d M, Y', strtotime($payment->date))}}</td>
+                                    <td>{{$payment->customer}}</td>
+                                    <td>{{$payment->user}}</td>
+                                    <td>{{$payment->paid}}</td>
+                                    <td>{{$payment->due}}</td>
                                     <td>
-                                    	<a class="btn btn-sm btn-6a8d9d" href="{{route('sales.show',$sale->id)}}"><span class="fa fa-eye"></span></a>
+                                    	<a class="btn btn-sm btn-6a8d9d" href="{{route('sale-payments.edit',$payment->id)}}"><span class="fa fa-edit"></span></a>
 
-                                    	<form action="{{route('sales.destroy',$sale->id)}}" method="post" style="display: none;" id="delete-form-{{$sale->id}}">
+                                    	<form action="{{route('sale-payments.destroy',$payment->id)}}" method="post" style="display: none;" id="delete-form-{{$payment->id}}">
                                             @csrf
                                             {{method_field('DELETE')}}
                                         </form>
                                         <a class="btn btn-sm bg-red" href="" onclick="if(confirm('Are You Sure To Delete?')){
                                             event.preventDefault();
-                                            getElementById('delete-form-{{$sale->id}}').submit();
+                                            getElementById('delete-form-{{$payment->id}}').submit();
                                             }else{
                                             event.preventDefault();
                                             }"><span class="glyphicon glyphicon-trash"></span></a>

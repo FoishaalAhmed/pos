@@ -16,11 +16,11 @@
         <div class="row">
             <div class="col-md-12">
                 <!-- Content Header (sale header) -->
-                <div class="box box-purple box-solid">
+                <div class="box box-6a8d9d box-solid">
                     <div class="box-header with-border">
                         <h3 class="box-title">New sale</h3>
                         <div class="box-tools pull-right">
-                        	<a href="{{route('sales.index')}}" class="btn btn-sm bg-green"><i class="fa fa-list"></i> Sale list</a>
+                        	<a href="{{route('sales.index')}}" class="btn btn-sm bg-purple"><i class="fa fa-list"></i> Sale list</a>
                         </div>		
                     </div>
                     <!-- /.box-header -->
@@ -121,7 +121,7 @@
                                     <div class="form-group">
                                         <div class="col-md-12">
                                             <label for=""><br></label>
-                                            <button class="btn btn-sm bg-purple form-control" type="button" id="addToCart">Add</button>
+                                            <button class="btn btn-sm btn-6a8d9d form-control" type="button" id="addToCart">Add</button>
                                         </div>
                                     </div>
                                 </div>
@@ -188,7 +188,7 @@
 	                        <div class="col-md-12">
 	                        	<center>
 	                        		<button type="reset" class="btn btn-sm bg-red">Reset</button>
-	                        		<button type="submit" class="btn btn-sm bg-purple">Save</button>
+	                        		<button type="submit" class="btn btn-sm btn-6a8d9d">Save</button>
 	                        	</center>
 	                        </div>
                         </form>
