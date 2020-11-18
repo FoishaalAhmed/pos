@@ -36,15 +36,12 @@
                                 <label class="control-label col-md-2">Date</label>
                                 <div class="col-sm-9">
                                     <input name="date" placeholder="date" class="form-control" required="" type="text" value="{{ $purchase_payment->date }}" id="date" autocomplete="off">
-
-                                    <input name="purchase_id" type="hidden" value="1" >
-                                    <input name="invoice" type="hidden" value="{{date('Y-m-d-H-i-s')}}" >
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2">User</label>
                                 <div class="col-sm-9">
-                                    <select name="user_id" class="form-control select2" style="width: 100%" id="user_id" required="">
+                                    <select name="user_id" class="form-control select2" style="width: 100%" id="user_id">
                                         <option value="">Select User</option>
                                         @foreach ($users as $user)
                                             <option value="{{$user->id}}" @if ($purchase_payment->user_id == $user->id) {{'selected'}}

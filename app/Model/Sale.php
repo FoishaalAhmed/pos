@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use App\Model\Customer;
 use App\Model\Sale_detail;
 use App\Model\Sale_payment;
 use Cart;
@@ -21,10 +22,10 @@ class Sale extends Model
     public static $validateStoreRule = [
 
         'date'                => 'required|string|max:10',
-        'note'                => 'required|string',
+        'note'                => 'string|nullable',
         'invoice'             => 'required|string|max:50',
-        'user_id'             => 'required|numeric',
-        'customer_id'         => 'required|numeric',
+        'user_id'             => 'numeric|nullable',
+        'customer_id'         => 'numeric|nullable',
         'extra_cost'          => 'numeric',
         'vat_percentage'      => 'numeric',
         'paid'                => 'required|numeric',
@@ -50,12 +51,27 @@ class Sale extends Model
     public function store_sale($request)
     {
 
+        $customer_id = '';
+        if ($request->customer == 'new') {
+
+            $customer        = new Customer;
+            $customer->name  = $request->name;
+            $customer->phone = $request->phone;
+            $customer->save();
+
+            $customer_id = $customer->id;
+
+        } else {
+
+            $customer_id = $request->user_id;
+        }
+
         $subtotal = str_replace(',', '', Cart::subtotal());
 
         $this->date                = date('Y-m-d', strtotime($request->date));
         $this->invoice             = $request->invoice;
         $this->user_id             = $request->user_id;
-        $this->customer_id         = $request->customer_id;
+        $this->customer_id         = $customer_id;
         $this->subtotal            = $subtotal;
         $this->vat_percentage      = $request->vat_percentage;
         $this->vat                 = $request->vat;
@@ -91,8 +107,7 @@ class Sale extends Model
         $sale_payments->paid           = $request->paid;
         $sale_payments->due            = $request->due;
         $sale_payments->user_id        = $request->user_id;
-        $sale_payments->customer_id    = $request->customer_id;
-        $sale_payments->payment_method = 1;
+        $sale_payments->customer_id    = $customer_id;
 
         $sale_payments->save();
 

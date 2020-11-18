@@ -15,13 +15,14 @@ class CartController extends Controller
     	$quantity   = $request->quantity;
     	$rate       = $request->rate;
     	$total      = $request->total;
-    	$unit       = $request->unit;
+
+        //echo $total;
 
     	$product = Product::findOrFail($product_id);
 
     	if ($product) {
     		//Cart::destroy();
-    		Cart::add(['id' => $product_id, 'name' => $product->name, 'qty' => $quantity, 'price' => $rate, 'weight' => $total ]);
+    		Cart::add(['id' => $product_id, 'name' => $product->name, 'qty' => $quantity, 'price' => $rate, 'weight' => 1, 'options' => ['size' => $total]]);
 
 	    	$cart = Cart::content();
 
@@ -31,13 +32,15 @@ class CartController extends Controller
 
     		$success_output = '<div class="alert alert-danger"> Product Not Found! </div>';
     		echo $success_output;
-    	}	
+    	}
     }
 
     public function subtotal()
     {
     	$subtotal = Cart::subtotal();
 
-    	echo $subtotal;
+        $subtotal2 = str_replace(',', '', $subtotal);
+
+    	echo $subtotal2;
     }
 }

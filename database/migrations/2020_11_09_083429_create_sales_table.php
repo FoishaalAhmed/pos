@@ -17,7 +17,7 @@ class CreateSalesTable extends Migration
             $table->bigIncrements('id');
             $table->string('date', 10);
             $table->string('invoice', 50);
-            $table->bigInteger('user_id');
+            $table->bigInteger('user_id')->nullable();
             $table->bigInteger('customer_id');
             $table->integer('subtotal');
             $table->integer('vat_percentage')->nullable();
@@ -26,7 +26,7 @@ class CreateSalesTable extends Migration
             $table->integer('discount_percentage')->nullable();
             $table->float('discount', 11, 2)->nullable();
             $table->float('total', 11, 2);
-            $table->mediumText('note');
+            $table->mediumText('note')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

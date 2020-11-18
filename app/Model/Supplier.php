@@ -13,26 +13,26 @@ class Supplier extends Model
 
     public static $validateStoreRule = [
 
-        'photo'        => 'mimes:jpeg,jpg,png,gif|max:1999',
-        'name'         => 'required|string|max:255',
-        'area'         => 'required|string|max:255',
-        'email'        => 'required|email|max:255',
-        'phone'        => 'required|numeric',
-        'address'      => 'required|string',
-        'company'      => 'required|string|max:255',
-        'company_phone' => 'required|numeric',
+        'photo'         => 'mimes:jpeg,jpg,png,gif|max:1999|nullable',
+        'name'          => 'required|string|max:255',
+        'area'          => 'string|max:255|nullable',
+        'email'         => 'email|max:255|nullable',
+        'phone'         => 'required|numeric',
+        'address'       => 'string|nullable',
+        'company'       => 'string|max:255|nullable',
+        'company_phone' => 'numeric|nullable',
     ];
 
     public static $validateUpdateRule = [
 
-        'photo'        => 'mimes:jpeg,jpg,png,gif|max:1999',
-        'name'         => 'required|string|max:255',
-        'area'         => 'required|string|max:255',
-        'email'        => 'required|email|max:255',
-        'phone'        => 'required|numeric',
-        'address'      => 'required|string',
-        'company'      => 'required|string|max:255',
-        'company_phone' => 'required|numeric',
+        'photo'         => 'mimes:jpeg,jpg,png,gif|max:1999|nullable',
+        'name'          => 'required|string|max:255',
+        'area'          => 'string|max:255|nullable',
+        'email'         => 'email|max:255|nullable',
+        'phone'         => 'required|numeric',
+        'address'       => 'string|nullable',
+        'company'       => 'string|max:255|nullable',
+        'company_phone' => 'numeric|nullable',
     ];
 
     public function store_supplier($request)

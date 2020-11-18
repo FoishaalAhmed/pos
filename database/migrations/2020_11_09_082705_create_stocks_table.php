@@ -17,7 +17,7 @@ class CreateStocksTable extends Migration
             $table->bigIncrements('id')->unsigned();
             $table->bigInteger('product_id')->unsigned();
             $table->integer('quantity');
-            $table->string('unit');
+            $table->string('unit')->nullable();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->timestamps();
         });

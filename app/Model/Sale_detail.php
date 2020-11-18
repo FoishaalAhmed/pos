@@ -15,7 +15,7 @@ class Sale_detail extends Model
     {
     	$sale_details = DB::table('sale_details')
                      ->leftJoin('products', 'sale_details.product_id', '=', 'products.id')
-                     ->select('sale_details.invoice','sale_details.quantity','sale_details.rate','sale_details.total','products.name as product')
+                     ->select('sale_details.id', 'sale_details.invoice', 'sale_details.quantity','sale_details.rate','sale_details.total','products.name as product')
                      ->get();
         return $sale_details;
     }

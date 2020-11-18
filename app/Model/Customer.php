@@ -14,24 +14,24 @@ class Customer extends Model
 
     public static $validateStoreRule = [
 
-        'photo'        => 'mimes:jpeg,jpg,png,gif|required|max:1999',
+        'photo'        => 'mimes:jpeg,jpg,png,gif|max:1999|nullable',
         'name'         => 'required|string|max:255',
-        'area'         => 'required|string|max:255',
-        'email'        => 'required|email|max:255',
+        'area'         => 'string|max:255|nullable',
+        'email'        => 'email|max:255|nullable',
         'phone'        => 'required|numeric',
-        'credit_limit' => 'required|numeric',
-        'address'      => 'required|string',
+        'credit_limit' => 'numeric|nullable',
+        'address'      => 'string|nullable',
     ];
 
     public static $validateUpdateRule = [
 
-        'photo'        => 'mimes:jpeg,jpg,png,gif|required|max:1999',
+        'photo'        => 'mimes:jpeg,jpg,png,gif|max:1999|nullable',
         'name'         => 'required|string|max:255',
-        'area'         => 'required|string|max:255',
-        'email'        => 'required|email|max:255',
+        'area'         => 'string|max:255|nullable',
+        'email'        => 'email|max:255|nullable',
         'phone'        => 'required|numeric',
-        'credit_limit' => 'required|numeric',
-        'address'      => 'required|string',
+        'credit_limit' => 'numeric|nullable',
+        'address'      => 'string|nullable',
     ];
 
     public function store_customer($request)

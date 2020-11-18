@@ -4,10 +4,11 @@ namespace App\Model;
 
 use App\Model\Purchase_detail;
 use App\Model\Purchase_payment;
+use App\Model\Supplier;
 use Cart;
+use DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use DB;
 use Session;
 
 
@@ -23,17 +24,16 @@ class Purchase extends Model
     public static $validateStoreRule = [
 
         'date'                => 'required|string|max:10',
-        'note'                => 'required|string',
+        'note'                => 'string|nullable',
         'invoice'             => 'required|string|max:50',
-        'user_id'             => 'required|numeric',
-        'supplier_id'         => 'required|numeric',
-        'extra_cost'          => 'numeric',
-        'vat_percentage'      => 'numeric',
+        'user_id'             => 'numeric|nullable',
+        'extra_cost'          => 'numeric|nullable',
+        'vat_percentage'      => 'numeric|nullable',
         'paid'                => 'required|numeric',
         'due'                 => 'required|numeric',
-        'vat'                 => 'numeric|between:0,99999999999.99',
-        'discount_percentage' => 'numeric',
-        'discount'            => 'numeric|between:0,99999999999.99',
+        'vat'                 => 'numeric|between:0,99999999999.99|nullable',
+        'discount_percentage' => 'numeric|nullable',
+        'discount'            => 'numeric|between:0,99999999999.99|nullable',
         'total'               => 'required|numeric|between:0,99999999999.99',
     ];
 
@@ -51,13 +51,27 @@ class Purchase extends Model
 
     public function store_purchase($request)
     {
+        $supplier_id = '';
+        if ($request->supplier == 'new') {
+
+            $supplier        = new Supplier;
+            $supplier->name  = $request->name;
+            $supplier->phone = $request->phone;
+            $supplier->save();
+
+            $supplier_id = $supplier->id;
+
+        } else {
+
+            $supplier_id = $request->user_id;
+        }
 
         $subtotal = str_replace(',', '', Cart::subtotal());
 
         $this->date                = date('Y-m-d', strtotime($request->date));
         $this->invoice             = $request->invoice;
         $this->user_id             = $request->user_id;
-        $this->supplier_id         = $request->supplier_id;
+        $this->supplier_id         = $supplier_id;
         $this->subtotal            = $subtotal;
         $this->vat_percentage      = $request->vat_percentage;
         $this->vat                 = $request->vat;
@@ -90,7 +104,7 @@ class Purchase extends Model
             $Stock = new Stock;
             $Stock->product_id  = $value->id;
             $Stock->quantity    = $value->qty;
-            $Stock->unit        = 'piece';
+            $Stock->unit        = $value->options->size;
             $Stock->save();
         }
 
@@ -102,8 +116,7 @@ class Purchase extends Model
         $purchase_payments->paid           = $request->paid;
         $purchase_payments->due            = $request->due;
         $purchase_payments->user_id        = $request->user_id;
-        $purchase_payments->supplier_id    = $request->supplier_id;
-        $purchase_payments->payment_method = 1;
+        $purchase_payments->supplier_id    = $supplier_id;
 
         $purchase_payments->save();
 
@@ -134,5 +147,27 @@ class Purchase extends Model
             Session::flash('message', 'Purchase Delete Failed!');
         }
         
+    }
+
+    public function get_purchase_report($start_date = '', $end_date = '', $supplier_id = '')
+    {
+        $query = DB::table('purchases')
+                     ->leftJoin('suppliers', 'purchases.supplier_id', '=', 'suppliers.id')
+                     ->leftJoin('users', 'purchases.user_id', '=', 'users.id')
+                     ->where('purchases.deleted_at', '=', NULL);
+
+        if ($start_date != '' && $end_date != '') {
+
+            $query->where('date', '>=', $start_date);
+            $query->where('date', '<=', $end_date);
+        }
+
+        if ($supplier_id != '') $query->where('supplier_id', $supplier_id);
+
+        $query->select('purchases.id','purchases.date','purchases.subtotal','purchases.total','purchases.note','users.name as user', 'suppliers.name as supplier');
+
+        $result = $query->get();
+
+        return $result;
     }
 }

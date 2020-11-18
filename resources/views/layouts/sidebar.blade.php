@@ -33,7 +33,7 @@
                 </ul>
             </li>
 
-            <li class="treeview @if(Request::path() === 'admin/purchases/create' || Request::path() === 'admin/purchases' || Request::path() === 'admin/purchase-payments/create' || Request::path() === 'admin/purchase-payments' || request()->is('admin/purchases/*') || request()->is('admin/purchase-payments/*/edit')) {{'active'}} @endif">
+            <li class="treeview @if(Request::path() === 'admin/purchases/create' || Request::path() === 'admin/purchases' || Request::path() === 'admin/purchase-payments/create' || Request::path() === 'admin/purchase-payments' || Request::path() === 'admin/purchase-returns' || request()->is('admin/purchases/*')  || request()->is('admin/purchase-returns/*') || request()->is('admin/purchase-payments/*/edit')) {{'active'}} @endif">
                 <a href="#">
                 <i class="fa fa-shopping-cart"></i> <span>Purchases</span>
                 <span class="pull-right-container">
@@ -45,10 +45,11 @@
                     <li class="@if(Request::path() === 'admin/purchases') {{'active'}} @endif"><a href="{{route('purchases.index')}}"><i class="fa fa-list"></i> View Purchase</a></li>
                     <li class="@if(Request::path() === 'admin/purchase-payments/create') {{'active'}} @endif"><a href="{{route('purchase-payments.create')}}"><i class="fa fa-plus"></i> New Purchase payment</a></li>
                     <li class="@if(Request::path() === 'admin/purchase-payments') {{'active'}} @endif"><a href="{{route('purchase-payments.index')}}"><i class="fa fa-list"></i> View Purchase payment</a></li>
+                    <li class="@if(Request::path() === 'admin/purchase-returns') {{'active'}} @endif"><a href="{{URL::to('admin/purchase-returns')}}"><i class="fa fa-undo"></i> View Purchase return</a></li>
                 </ul>
             </li>
 
-            <li class="treeview @if(Request::path() === 'admin/sales/create' || Request::path() === 'admin/sales' || Request::path() === 'admin/sale-payments/create' || Request::path() === 'admin/sale-payments' || request()->is('admin/sales/*') || request()->is('admin/sale-payments/*/edit')) {{'active'}} @endif">
+            <li class="treeview @if(Request::path() === 'admin/sales/create' || Request::path() === 'admin/sales' || Request::path() === 'admin/sale-payments/create' || Request::path() === 'admin/sale-payments' || Request::path() === 'admin/sale-returns' || request()->is('admin/sale-returns/*') || request()->is('admin/sales/*') || request()->is('admin/sale-payments/*/edit')) {{'active'}} @endif">
                 <a href="#">
                 <i class="fa fa-exchange"></i> <span>sales</span>
                 <span class="pull-right-container">
@@ -60,6 +61,8 @@
                     <li class="@if(Request::path() === 'admin/sales') {{'active'}} @endif"><a href="{{route('sales.index')}}"><i class="fa fa-list"></i> View Sale</a></li>
                     <li class="@if(Request::path() === 'admin/sale-payments/create') {{'active'}} @endif"><a href="{{route('sale-payments.create')}}"><i class="fa fa-plus"></i> New Sale payment</a></li>
                     <li class="@if(Request::path() === 'admin/sale-payments') {{'active'}} @endif"><a href="{{route('sale-payments.index')}}"><i class="fa fa-list"></i> View Sale payment</a></li>
+
+                    <li class="@if(Request::path() === 'admin/sale-returns') {{'active'}} @endif"><a href="{{URL::to('admin/sale-returns')}}"><i class="fa fa-undo"></i> View sale return</a></li>
                 </ul>
             </li>
 

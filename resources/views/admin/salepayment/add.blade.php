@@ -35,15 +35,14 @@
                                 <label class="control-label col-md-2">Date</label>
                                 <div class="col-sm-9">
                                     <input name="date" placeholder="date" class="form-control" required="" type="text" value="{{ old('date') }}" id="date" autocomplete="off">
-
-                                    <input name="sale_id" type="hidden" value="1" >
-                                    <input name="invoice" type="hidden" value="{{date('Y-m-d-H-i-s')}}" >
+                                    <input type="hidden" name="sale_id" value="0">
+                                    <input type="hidden" name="invoice" value="2020-12-12">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2">User</label>
                                 <div class="col-sm-9">
-                                    <select name="user_id" class="form-control select2" style="width: 100%" id="user_id" required="">
+                                    <select name="user_id" class="form-control select2" style="width: 100%" id="user_id">
                                         <option value="">Select User</option>
                                         @foreach ($users as $user)
                                             <option value="{{$user->id}}" @if (old('user_id') == $user->id) {{'selected'}}

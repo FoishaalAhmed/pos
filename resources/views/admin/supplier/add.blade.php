@@ -38,7 +38,7 @@
                             <div class="form-group">
                                 <label class="control-label col-md-2">E-mail Address</label>
                                 <div class="col-sm-9">
-                                    <input type="email" class="form-control" placeholder="E-mail Address" name="email" value="{{old('email')}}" required="">
+                                    <input type="email" class="form-control" placeholder="E-mail Address" name="email" value="{{old('email')}}">
                                     
                                 </div>
                             </div>
@@ -51,26 +51,26 @@
                             <div class="form-group">
                                 <label class="control-label col-md-2">Area</label>
                                 <div class="col-sm-9">
-                                    <input name="area" placeholder="area" class="form-control" required="" type="text" value="{{ old('area') }}" required="">
+                                    <input name="area" placeholder="area" class="form-control" type="text" value="{{ old('area') }}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2">Address</label>
                                 <div class="col-sm-9">
-                                    <textarea name="address" rows="3" class="form-control" placeholder="Address" style="resize: vertical;" required="">{{old('address')}}</textarea>
+                                    <textarea name="address" rows="3" class="form-control" placeholder="Address" style="resize: vertical;">{{old('address')}}</textarea>
                                     
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2">Company</label>
                                 <div class="col-sm-9">
-                                    <input name="company" placeholder="Company" class="form-control" required="" type="text" value="{{ old('company') }}" required="">
+                                    <input name="company" placeholder="Company" class="form-control" type="text" value="{{ old('company') }}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2">Company phone</label>
                                 <div class="col-sm-9">
-                                    <input name="company_phone" placeholder="Company phone" class="form-control" required="" type="text" value="{{ old('company_phone') }}" required="">
+                                    <input name="company_phone" placeholder="Company phone" class="form-control" type="text" value="{{ old('company_phone') }}">
                                 </div>
                             </div>
                             <div class="form-group">

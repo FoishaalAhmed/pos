@@ -33,12 +33,14 @@
       <div class="row invoice-info">
         <div class="col-sm-4 invoice-col">
           User
+          @if ($user_info != '')
           <address>
             <strong>{{$user_info->name}}</strong><br>
             <strong>Email:</strong> {{$user_info->email}} <br>
             <strong>Phone:</strong> {{$user_info->phone}} <br>
             <strong>Address:</strong> {{$user_info->address}}
           </address>
+          @endif
         </div>
         <!-- /.col -->
         <div class="col-sm-4 invoice-col">
@@ -47,9 +49,7 @@
             <strong>{{$supplier_info->name}}</strong><br>
             <strong>Email:</strong> {{$supplier_info->email}} <br>
             <strong>Phone:</strong> {{$supplier_info->phone}} <br>
-            <strong>Address:</strong> {{$supplier_info->address}} <br>
-            <strong>Company:</strong> {{$supplier_info->company}} <br>
-            <strong>Company phone:</strong> {{$supplier_info->company_phone}}
+            <strong>Address:</strong> {{$supplier_info->address}}
           </address>
         </div>
         <!-- /.col -->
@@ -73,6 +73,7 @@
 	              <th>Qty</th>
 	              <th>Rate</th>
 	              <th>Total</th>
+                <th>Return</th>
 	            </tr>
             </thead>
             <tbody>
@@ -83,6 +84,9 @@
 	              <td>{{$detail->quantity}}</td>
 	              <td>{{$detail->rate}}</td>
 	              <td>{{$detail->total}}</td>
+                <td>
+                  <a href="{{route('purchase-returns',$detail->id)}}" class="btn btn-sm bg-red"><i class="fa fa-undo" aria-hidden="true"></i></a>
+                </td>
 	            </tr>
 	            @endforeach
             </tbody>
@@ -147,14 +151,14 @@
                     <label for="inputEmail" class="col-sm-2 control-label">Paid</label>
 
                     <div class="col-sm-10">
-                      <input type="number" class="form-control" name="paid" id="inputPaid" placeholder="Paid">
+                      <input type="number" class="form-control" name="paid" id="inputPaid" placeholder="Paid" autocomplete="off">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">Due</label>
 
                     <div class="col-sm-10">
-                      <input type="number" class="form-control" name="due" id="inputDue" placeholder="Due">
+                      <input type="number" class="form-control" name="due" id="inputDue" placeholder="Due" autocomplete="off">
                     </div>
                   </div>
                   <div class="form-group">

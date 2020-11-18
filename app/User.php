@@ -43,12 +43,13 @@ class User extends Authenticatable
 
     public static $validateStoreRule = [
 
-        'photo'       => 'mimes:jpeg,jpg,png,gif|required|max:1999',
+        'photo'       => 'mimes:jpeg,jpg,png,gif|max:1999|nullable',
         'name'        => 'required|string|max:255',
         'username'    => 'required|string|max:255|unique:users',
         'email'       => 'required|email|max:255|unique:users',
-        'phone'       => 'required|numeric|unique:users',
-        'address'     => 'required|string',
+        'phone'       => 'numeric|nullable',
+        'role_id'     => 'required|numeric',
+        'address'     => 'string|nullable',
         'password'    => 'required|string|min:8|confirmed',
     ];
 
@@ -65,20 +66,20 @@ class User extends Authenticatable
 
     public static $validateUpdateRule = [
 
-        'photo'       => 'mimes:jpeg,jpg,png,gif|required|max:1999',
+        'photo'       => 'mimes:jpeg,jpg,png,gif|max:1999',
         'name'        => 'required|string|max:255',
-        'username'    => 'string|max:255',
-        'email'       => 'email|max:255',
-        'phone'       => 'numeric',
-        'address'     => 'required|string',
+        'username'    => 'required|string|max:255',
+        'email'       => 'required|email|max:255',
+        'phone'       => 'numeric|nullable',
+        'address'     => 'string|nullable',
 
     ];
 
     public static $validateInfoRule = [
 
         'name'        => 'required|string|max:255',
-        'username'    => 'string|max:255',
-        'email'       => 'email|max:255',
+        'username'    => 'required|string|max:255',
+        'email'       => 'required|email|max:255',
         'phone'       => 'numeric',
         'address'     => 'required|string',
 
@@ -147,6 +148,7 @@ class User extends Authenticatable
         
         $user->name      = $request->name;
         $user->address   = $request->address;
+        $user->phone     = $request->phone;
 
         $user_update       = $user->save();
 

@@ -14,24 +14,24 @@ class Purchase_payment extends Model
 
     public static $validateStoreRule = [
 
-    	'purchase_id'    => 'required|numeric',
+    	'purchase_id'    => 'numeric|nullable',
     	'date'           => 'required|string|max:10',
-    	'invoice'        => 'required|string|max:50',
+    	'invoice'        => 'string|max:50|nullable',
         'paid'           => 'required|numeric',
         'due'            => 'required|numeric',
-        'user_id'        => 'required|numeric',
+        'user_id'        => 'numeric|nullable',
         'supplier_id'    => 'required|numeric',
 
     ];
 
     public static $validateUpdateRule = [
 
-    	'purchase_id'    => 'required|numeric',
+    	'purchase_id'    => 'numeric|nullable',
     	'date'           => 'required|string|max:10',
-    	'invoice'        => 'required|string|max:50',
+    	'invoice'        => 'string|max:50|nullable',
         'paid'           => 'required|numeric',
         'due'            => 'required|numeric',
-        'user_id'        => 'required|numeric',
+        'user_id'        => 'numeric|nullable',
         'supplier_id'    => 'required|numeric',
 
     ];

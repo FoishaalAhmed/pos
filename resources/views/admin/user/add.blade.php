@@ -51,7 +51,7 @@
                             <div class="form-group">
                                 <label class="control-label col-md-2">Phone</label>
                                 <div class="col-sm-9">
-                                    <input name="phone" placeholder="Phone" class="form-control" required="" type="text" value="{{ old('phone') }}" required="">
+                                    <input name="phone" placeholder="Phone" class="form-control" type="text" value="{{ old('phone') }}">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -71,14 +71,14 @@
                             <div class="form-group">
                                 <label class="control-label col-md-2">Address</label>
                                 <div class="col-sm-9">
-                                    <textarea name="address" rows="3" class="form-control" placeholder="Address" style="resize: vertical;" required="">{{old('address')}}</textarea>
+                                    <textarea name="address" rows="3" class="form-control" placeholder="Address" style="resize: vertical;">{{old('address')}}</textarea>
                                     
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2">Role</label>
                                 <div class="col-sm-9">
-                                    <select name="role_id" class="form-control select2" id="" style="width: 100%;"> 
+                                    <select name="role_id" class="form-control select2" id="" style="width: 100%;" required=""> 
                                         @foreach ($roles as $key => $role)
                                             <option value="{{$role->id}}" @if (old('role_id') == $role->id) {{'selected'}}
                                             @endif >{{$role->name}}</option>

@@ -45,7 +45,7 @@
                                     <div class="col-md-12">
                                         <label class="control-label col-md-2">Category</label>
                                         <div class="col-sm-10">
-                                            <select name="category_id" class="form-control select2" style="width: 100%;" id="">
+                                            <select name="category_id" class="form-control select2" style="width: 100%;" id="" required="">
                                                 @foreach ($categories as $key => $category)
                                                     <option value="{{$category->id}}" {{ $product->category_id == $category->id ? 'selected' : '' }}>{{$category->name}}</option>
                                                 @endforeach
@@ -79,7 +79,7 @@
                                     <div class="col-md-12">
                                         <label class="control-label col-md-2">Vat</label>
                                         <div class="col-sm-10">
-                                            <input name="vat" placeholder="Vat Percentage" class="form-control" required="" type="text" value="{{ $product->vat }}">
+                                            <input name="vat" placeholder="Vat Percentage" class="form-control" type="text" value="{{ $product->vat }}">
                                         </div>
                                     </div>
                                 </div>

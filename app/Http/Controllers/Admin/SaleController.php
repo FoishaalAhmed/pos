@@ -8,6 +8,7 @@ use App\Model\Product;
 use App\Model\Sale;
 use App\Model\Sale_detail;
 use App\Model\Sale_payment;
+use App\Model\Unit;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -46,11 +47,12 @@ class SaleController extends Controller
      */
     public function create()
     {
-        $products  = Product::select('id','name')->get();
+        $products  = Product::select('id','name', 'sell_price')->get();
         $users     = User::select('id','name')->get();
         $customers = Customer::select('id','name')->get();
+        $units     = Unit::select('value','name')->get();
 
-        return view('admin.sale.add', compact('products', 'users', 'customers'));
+        return view('admin.sale.add', compact('products', 'users', 'customers', 'units'));
     }
 
     /**
@@ -79,8 +81,8 @@ class SaleController extends Controller
         $sale = Sale::findOrFail($id);
 
         if ($sale) {
-
-            $user_info     = User::findOrFail($sale->user_id);
+            $user_info = '';
+            if($sale->user_id != '') $user_info     = User::findOrFail($sale->user_id);
             $customer_info = Customer::findOrFail($sale->customer_id);
 
             $sale_details = $this->sale_datil_object->get_sale_detail_by_sale_id($id);

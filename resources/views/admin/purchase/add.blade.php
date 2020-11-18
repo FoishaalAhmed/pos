@@ -50,7 +50,7 @@
                                     <div class="form-group">
                                         <div class="col-md-12">
                                             <label for="">User</label>
-                                            <select name="user_id" id="" class="form-control select2" style="width: 100%" required="">
+                                            <select name="user_id" id="" class="form-control select2" style="width: 100%">
                                                 <option value="">Select User</option>
                                                 @foreach ($users as $key => $user)
                                                     <option value="{{$user->id}}">{{$user->name}}</option>
@@ -59,20 +59,58 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <div class="col-md-12">
-                                            <label for="">Supplier</label>
-                                            <select name="supplier_id" id="" class="form-control select2" style="width: 100%" required="">
-                                                <option value="">Select Supplier</option>
-                                                @foreach ($suppliers as $key => $supplier)
-                                                    <option value="{{$supplier->id}}">{{$supplier->name}}</option>
-                                                @endforeach
-                                            </select>
+                                            <input type="radio" id="other" name="supplier" value="old" checked="">
+                                            <label for="other">Old Supplier</label>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+
+                                            <input type="radio" id="other2" name="supplier" value="new">
+                                            <label for="other2">New Supplier</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="new-supplier" style="display: none;">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <label for="">Name</label>
+                                                <input type="text" name="name" class="form-control" id="name" placeholder="name" value="{{old('name')}}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <label for="">Phone</label>
+                                                <input type="text" name="phone" class="form-control" id="phone" placeholder="name" value="{{old('phone')}}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="old-supplier">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <label for="">Supplier</label>
+                                                <select name="supplier_id" id="supplier_id" class="form-control select2" style="width: 100%" required="">
+                                                    <option value="">Select Supplier</option>
+                                                    @foreach ($suppliers as $key => $supplier)
+                                                        <option value="{{$supplier->id}}">{{$supplier->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <div class="col-md-12">
                                             <label for="">Note</label>
@@ -80,6 +118,15 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-md-4" id="false-div" style="visibility: hidden;">
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <label for="">Note</label>
+                                            <input type="text" class="form-control" placeholder="Note" >
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <div class="col-md-12">
@@ -101,6 +148,19 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <label for="">Unit</label>
+                                            <select id="total" class="form-control select2" style="width: 100%" required="">
+                                                <option value="">Select Units</option>
+                                                @foreach ($units as $unit)
+                                                    <option value="{{$unit->value}}">{{$unit->name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <div class="col-md-12">
@@ -109,15 +169,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <div class="col-md-12">
-                                            <label for="">Total</label>
-                                            <input type="text" class="form-control" id="total" placeholder="purchase total" required="">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
+                                <div class="col-md-1">
                                     <div class="form-group">
                                         <div class="col-md-12">
                                             <label for=""><br></label>
@@ -263,8 +315,7 @@
 
                 var extra_cost     = $('#extra_cost').val();
                 var vat_percentage = $('#vat_percentage').val();
-                var subtotal       = data;
-                var subtotal2      = subtotal.replace(',', '');
+                var subtotal2       = data;
                 var vat            = parseInt(subtotal2) * parseInt(vat_percentage) / 100;
 
                 $('#vat').val(vat);
@@ -282,7 +333,7 @@
 
                 var due = parseInt(total) - parseInt(paid);
 
-                $('#due').val(due); 
+                $('#due').val(due);
             },
 
             error: function(error) {
@@ -301,6 +352,27 @@
             changeMonth: true,
             dateFormat:  "dd-mm-yy",
             yearRange:   "-10:+10"
+        });
+
+        $("input[name$='supplier']").click(function() {
+            var test = $(this).val();
+
+            if(test == 'new') {
+              $("#old-supplier").hide();
+              $("#false-div").hide();
+              $("#new-supplier").show();
+              $("#supplier_id").prop("required", false);
+              $("#name").prop("required", true);
+              $("#phone").prop("required", true);
+            } else {
+              $("#old-supplier").show();
+              $("#new-supplier").hide(); 
+              $("#supplier_id").prop("required", true);              
+              $("#name").prop("required", false);
+              $("#phone").prop("required", false);
+              $("#false-div").show();
+            }
+
         });
     });
 

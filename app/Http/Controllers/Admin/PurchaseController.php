@@ -78,18 +78,21 @@ class PurchaseController extends Controller
      */
     public function show($id)
     {
+
         $purchase = Purchase::findOrFail($id);
 
         if ($purchase) {
 
-            $user_info     = User::findOrFail($purchase->user_id);
+            $user_info = '';
+
+            if($purchase->user_id != '') $user_info = User::findOrFail($purchase->user_id);
             $supplier_info = Supplier::findOrFail($purchase->supplier_id);
 
             $purchase_details = $this->purchase_datil_object->get_purchase_detail_by_purchase_id($id);
             $purchase_payment = $this->purchase_payment_object->get_purchase_payment_by_purchase_id($id);
 
             return view('admin.purchase.view', compact('purchase', 'user_info', 'supplier_info', 'purchase_details', 'purchase_payment'));
-            
+         
         }
 
     }

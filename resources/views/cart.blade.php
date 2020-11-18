@@ -14,7 +14,7 @@
         <tr>
             <td>{{$loop->index + 1}}</td>
             <td>{{$value->name}}</td>
-            <td>{{$value->qty}}</td>
+            <td>{{$value->qty}} {{$value->options->size}}</td>
             <td>{{$value->price}}</td>
             <td>{{$value->total}}</td>
         </tr>

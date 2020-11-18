@@ -15,14 +15,14 @@ class CreatePurchasePaymentsTable extends Migration
     {
         Schema::create('purchase_payments', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('purchase_id');
+            $table->bigInteger('purchase_id')->nullable();
             $table->string('date', 10);
-            $table->string('invoice', 50);
+            $table->string('invoice', 50)->nullable();
             $table->integer('paid');
             $table->integer('due');
-            $table->bigInteger('user_id');
+            $table->bigInteger('user_id')->nullable();
             $table->bigInteger('supplier_id');
-            $table->bigInteger('payment_method');
+            $table->bigInteger('payment_method')->nullable();
             $table->timestamps();
         });
     }

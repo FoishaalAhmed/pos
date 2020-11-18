@@ -18,10 +18,10 @@ class CreateCustomersTable extends Migration
             $table->string('name', 255);
             $table->string('email', 255)->nullable();
             $table->string('phone', 15);
-            $table->string('area', 255);
-            $table->string('photo', 255);
-            $table->mediumText('address');
-            $table->integer('credit_limit');
+            $table->string('area', 255)->nullable();
+            $table->string('photo', 255)->nullable();
+            $table->mediumText('address')->nullable();
+            $table->integer('credit_limit')->nullable();
             $table->timestamps();
         });
     }

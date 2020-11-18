@@ -52,7 +52,7 @@
                             <div class="form-group">
                                 <label class="control-label col-md-2">Phone</label>
                                 <div class="col-sm-9">
-                                    <input name="phone" placeholder="Phone" class="form-control" required="" type="text" value="{{ $user_info->phone }}" readonly="">
+                                    <input name="phone" placeholder="Phone" class="form-control" type="text" value="{{ $user_info->phone }}">
                                 </div>
                             </div>
                             <div class="form-group">

@@ -87,7 +87,7 @@
                 <div class="form-group">
                     <label class="control-label col-md-2">Priority</label>
                     <div class="col-sm-9">
-                        <input name="priority" placeholder="Priority" class="form-control" required="" type="text" value="{{ old('priority') }}">
+                        <input name="priority" placeholder="Priority" class="form-control" required="" type="text" value="{{ old('priority') }}" autocomplete="off">
                     </div>
                 </div>
                 <div class="col-md-12">
@@ -128,7 +128,7 @@
                 <div class="form-group">
                     <label class="control-label col-md-2">Priority</label>
                     <div class="col-sm-9">
-                        <input name="priority" id="priority" placeholder="Priority" class="form-control" required="" type="text" value="{{ old('priority') }}">
+                        <input name="priority" id="priority" placeholder="Priority" class="form-control" required="" type="text" value="{{ old('priority') }}" autocomplete="off">
                     </div>
                 </div>
                 <div class="col-md-12">

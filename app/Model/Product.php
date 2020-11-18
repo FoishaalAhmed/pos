@@ -14,10 +14,10 @@ class Product extends Model
 
     public static $validateStoreRule = [
 
-        'photo'       => 'mimes:jpeg,jpg,png,gif|max:1999',
+        'photo'       => 'mimes:jpeg,jpg,png,gif|max:1999|nullable',
         'name'        => 'required|string|max:255',
-        'description' => 'string',
-        'vat'         => 'between:0,99.99',
+        'description' => 'string|nullable',
+        'vat'         => 'between:0,99.99|nullable',
         'buy_price'   => 'required|numeric',
         'sell_price'  => 'required|numeric',
         'category_id' => 'required|numeric',
@@ -25,10 +25,10 @@ class Product extends Model
 
     public static $validateUpdateRule = [
 
-        'photo'       => 'mimes:jpeg,jpg,png,gif|max:1999',
+        'photo'       => 'mimes:jpeg,jpg,png,gif|max:1999|nullable',
         'name'        => 'required|string|max:255',
-        'description' => 'string',
-        'vat'         => 'between:0,99.99',
+        'description' => 'string|nullable',
+        'vat'         => 'between:0,99.99|nullable',
         'buy_price'   => 'required|numeric',
         'sell_price'  => 'required|numeric',
         'category_id' => 'required|numeric',

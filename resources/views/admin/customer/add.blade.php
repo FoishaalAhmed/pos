@@ -38,33 +38,33 @@
                             <div class="form-group">
                                 <label class="control-label col-md-2">E-mail Address</label>
                                 <div class="col-sm-9">
-                                    <input type="email" class="form-control" placeholder="E-mail Address" name="email" value="{{old('email')}}" required="">
+                                    <input type="email" class="form-control" placeholder="E-mail Address" name="email" value="{{old('email')}}">
                                     
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2">Phone</label>
                                 <div class="col-sm-9">
-                                    <input name="phone" placeholder="Phone" class="form-control" required="" type="text" value="{{ old('phone') }}" required="">
+                                    <input name="phone" placeholder="Phone" class="form-control" type="text" value="{{ old('phone') }}" required="">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2">Area</label>
                                 <div class="col-sm-9">
-                                    <input name="area" placeholder="area" class="form-control" required="" type="text" value="{{ old('area') }}" required="">
+                                    <input name="area" placeholder="area" class="form-control" type="text" value="{{ old('area') }}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2">Address</label>
                                 <div class="col-sm-9">
-                                    <textarea name="address" rows="3" class="form-control" placeholder="Address" style="resize: vertical;" required="">{{old('address')}}</textarea>
+                                    <textarea name="address" rows="3" class="form-control" placeholder="Address" style="resize: vertical;">{{old('address')}}</textarea>
                                     
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2">Credit limit</label>
                                 <div class="col-sm-9">
-                                    <input name="credit_limit" placeholder="Credit limit" class="form-control" required="" type="number" value="{{ old('credit_limit') }}" required="">
+                                    <input name="credit_limit" placeholder="Credit limit" class="form-control" type="number" value="{{ old('credit_limit') }}">
                                 </div>
                             </div>
                             <div class="form-group">

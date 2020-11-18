@@ -20,9 +20,9 @@ class CreateSalePaymentsTable extends Migration
             $table->string('invoice', 50);
             $table->integer('paid');
             $table->integer('due');
-            $table->bigInteger('user_id');
+            $table->bigInteger('user_id')->nullable();
             $table->bigInteger('customer_id');
-            $table->bigInteger('payment_method');
+            $table->bigInteger('payment_method')->nullable();
             $table->timestamps();
         });
     }

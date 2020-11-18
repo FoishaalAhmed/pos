@@ -21,7 +21,7 @@ class CreatePurchaseReturnsTable extends Migration
             $table->bigInteger('product_id');
             $table->integer('quantity');
             $table->bigInteger('supplier_id');
-            $table->bigInteger('user_id');
+            $table->bigInteger('user_id')->nullable();
             $table->timestamps();
         });
     }

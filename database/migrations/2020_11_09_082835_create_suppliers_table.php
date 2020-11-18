@@ -18,10 +18,10 @@ class CreateSuppliersTable extends Migration
             $table->string('name', 255);
             $table->string('email', 255)->nullable();
             $table->string('phone', 15);
-            $table->string('company_phone', 15);
-            $table->string('area', 255);
-            $table->string('photo', 255);
-            $table->mediumText('address');
+            $table->string('company_phone', 15)->nullable();
+            $table->string('area', 255)->nullable();
+            $table->string('photo', 255)->nullable();
+            $table->mediumText('address')->nullable();
             $table->timestamps();
         });
     }

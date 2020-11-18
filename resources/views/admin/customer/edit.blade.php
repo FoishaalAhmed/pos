@@ -52,7 +52,7 @@
                             <div class="form-group">
                                 <label class="control-label col-md-2">Area</label>
                                 <div class="col-sm-9">
-                                    <input name="area" placeholder="Area" class="form-control" required="" type="text" value="{{ $customer_info->area }}">
+                                    <input name="area" placeholder="Area" class="form-control" type="text" value="{{ $customer_info->area }}">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -65,7 +65,7 @@
                             <div class="form-group">
                                 <label class="control-label col-md-2">Credit limit</label>
                                 <div class="col-sm-9">
-                                    <input name="credit_limit" placeholder="Credit limit" class="form-control" required="" type="number" value="{{ $customer_info->credit_limit }}">
+                                    <input name="credit_limit" placeholder="Credit limit" class="form-control" type="number" value="{{ $customer_info->credit_limit }}">
                                 </div>
                             </div>
                             <div class="form-group">

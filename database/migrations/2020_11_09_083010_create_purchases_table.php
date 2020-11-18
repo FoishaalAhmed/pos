@@ -17,7 +17,7 @@ class CreatePurchasesTable extends Migration
             $table->bigIncrements('id');
             $table->string('date', 10);
             $table->string('invoice', 50);
-            $table->bigInteger('user_id');
+            $table->bigInteger('user_id')->nullable();
             $table->bigInteger('supplier_id');
             $table->float('subtotal', 11, 2);
             $table->integer('vat_percentage')->nullable();
@@ -26,7 +26,7 @@ class CreatePurchasesTable extends Migration
             $table->integer('discount_percentage')->nullable();
             $table->float('discount', 11, 2)->nullable();
             $table->float('total', 11, 2);
-            $table->mediumText('note');
+            $table->mediumText('note')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

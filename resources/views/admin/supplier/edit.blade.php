@@ -39,7 +39,7 @@
                             <div class="form-group">
                                 <label class="control-label col-md-2">E-mail Address</label>
                                 <div class="col-sm-9">
-                                    <input type="email" class="form-control" placeholder="E-mail Address" name="email" value="{{$supplier_info->email}}" required="">
+                                    <input type="email" class="form-control" placeholder="E-mail Address" name="email" value="{{$supplier_info->email}}">
                                     
                                 </div>
                             </div>
@@ -52,26 +52,26 @@
                             <div class="form-group">
                                 <label class="control-label col-md-2">Area</label>
                                 <div class="col-sm-9">
-                                    <input name="area" placeholder="area" class="form-control" required="" type="text" value="{{ $supplier_info->area }}" required="">
+                                    <input name="area" placeholder="area" class="form-control" type="text" value="{{ $supplier_info->area }}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2">Address</label>
                                 <div class="col-sm-9">
-                                    <textarea name="address" rows="3" class="form-control" placeholder="Address" style="resize: vertical;" required="">{{$supplier_info->address}}</textarea>
+                                    <textarea name="address" rows="3" class="form-control" placeholder="Address" style="resize: vertical;">{{$supplier_info->address}}</textarea>
                                     
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2">Company</label>
                                 <div class="col-sm-9">
-                                    <input name="company" placeholder="Company" class="form-control" required="" type="text" value="{{ $supplier_info->company }}" required="">
+                                    <input name="company" placeholder="Company" class="form-control" type="text" value="{{ $supplier_info->company }}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2">Company phone</label>
                                 <div class="col-sm-9">
-                                    <input name="company_phone" placeholder="Company phone" class="form-control" required="" type="text" value="{{ $supplier_info->company_phone }}" required="">
+                                    <input name="company_phone" placeholder="Company phone" class="form-control" type="text" value="{{ $supplier_info->company_phone }}">
                                 </div>
                             </div>
                             <div class="form-group">

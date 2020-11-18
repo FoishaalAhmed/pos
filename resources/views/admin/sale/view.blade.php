@@ -33,12 +33,15 @@
       <div class="row invoice-info">
         <div class="col-sm-4 invoice-col">
           User
+          @if ($user_info != '')
+          
           <address>
             <strong>{{$user_info->name}}</strong><br>
             <strong>Email:</strong> {{$user_info->email}} <br>
             <strong>Phone:</strong> {{$user_info->phone}} <br>
             <strong>Address:</strong> {{$user_info->address}}
           </address>
+          @endif
         </div>
         <!-- /.col -->
         <div class="col-sm-4 invoice-col">
@@ -71,6 +74,7 @@
 	              <th>Qty</th>
 	              <th>Rate</th>
 	              <th>Total</th>
+                <th>Return</th>
 	            </tr>
             </thead>
             <tbody>
@@ -81,6 +85,9 @@
 	              <td>{{$detail->quantity}}</td>
 	              <td>{{$detail->rate}}</td>
 	              <td>{{$detail->total}}</td>
+                <td>
+                  <a href="{{route('sale-returns',$detail->id)}}" class="btn btn-sm bg-red"><i class="fa fa-undo" aria-hidden="true"></i></a>
+                </td>
 	            </tr>
 	            @endforeach
             </tbody>
