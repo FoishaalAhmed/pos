@@ -25,7 +25,7 @@ class Sale extends Model
         'note'                => 'string|nullable',
         'invoice'             => 'required|string|max:50',
         'user_id'             => 'numeric|nullable',
-        'customer_id'         => 'numeric|nullable',
+        'customer_id'         => 'numeric',
         'extra_cost'          => 'numeric',
         'vat_percentage'      => 'numeric',
         'paid'                => 'required|numeric',
@@ -34,6 +34,13 @@ class Sale extends Model
         'discount_percentage' => 'numeric',
         'discount'            => 'numeric|between:0,99999999999.99',
         'total'               => 'required|numeric|between:0,99999999999.99',
+    ];
+
+    public static $validateSearchRule = [
+
+        'start_date'  => 'nullable|string|max:10',
+        'end_date'    => 'nullable|string|max:10',
+        'supplier_id' => 'numeric|nullable',
     ];
 
     public function get_sales()
@@ -63,7 +70,7 @@ class Sale extends Model
 
         } else {
 
-            $customer_id = $request->user_id;
+            $customer_id = $request->customer_id;
         }
 
         $subtotal = str_replace(',', '', Cart::subtotal());
@@ -138,5 +145,47 @@ class Sale extends Model
             Session::flash('message', 'Sale Delete Failed!');
         }
         
+    }
+
+    public function get_sale_report($start_date = '', $end_date = '', $customer_id = '')
+    {
+        $query = DB::table('sales')
+                     ->leftJoin('customers', 'sales.customer_id', '=', 'customers.id')
+                     ->leftJoin('users', 'sales.user_id', '=', 'users.id')
+                     ->where('sales.deleted_at', '=', NULL);
+
+        if ($start_date != '' && $end_date != '') {
+
+            $query->where('sales.date', '>=', $start_date);
+            $query->where('sales.date', '<=', $end_date);
+        }
+
+        if ($customer_id != '') {
+            $query->where('sales.customer_id', $customer_id);
+        }
+
+        $query->select('sales.id','sales.date','sales.total','sales.note','users.name as user', 'customers.name as customer');
+
+        $result = $query->get();
+
+        return $result;
+    }
+
+    public function get_todays_sale($today)
+    {
+        $sales = DB::table('sales')
+                     ->where('sales.deleted_at', '=', NULL)
+                     ->where('sales.date', $today)
+                     ->groupBy('sales.date')
+                     ->select(DB::raw('SUM(sales.total) as total_sale'));
+
+        if ($sales->count() > 0) {
+
+            return $sales->first();
+
+        } else{
+
+            return null;
+        }
     }
 }

@@ -24,6 +24,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth', 'admin']], function(){
 
 	Route::resource('/users', 'UserController');
+	Route::resource('/costs', 'CostController');
 	Route::resource('/customers', 'CustomerController');
 	Route::resource('/suppliers', 'SupplierController');
 	Route::resource('/categories', 'CategoryController');
@@ -58,6 +59,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
 	/** report route start **/
 
 	Route::get('/purchase-reports', 'ReportController@purchase')->name('purchase.report');
+	Route::get('/purchase-payment-reports', 'ReportController@purchase_payment')->name('purchase.payment.report');
+	Route::get('/sale-reports', 'ReportController@sale')->name('sale.report');
+	Route::get('/sale-payment-reports', 'ReportController@sale_payment')->name('sale.payment.report');
 
 	/** report route end **/
 

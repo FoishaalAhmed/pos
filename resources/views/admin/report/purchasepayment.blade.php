@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Purchase Report')
+@section('title', 'Purchase payment Report')
 @section('content')
 <div class="content-wrapper">
     <section class="content-header">
@@ -9,16 +9,16 @@
             <small>Version 2.0</small>
         </h1>
         <ol class="breadcrumb">
-            <li class="active">Purchase Report</li>
+            <li class="active">Purchase payment Report</li>
         </ol>
     </section>
     <div class="content">
         <div class="row">
             <div class="col-md-12">
                 <!-- Content Header (customer header) -->
-                <div class="box box-info box-solid">
+                <div class="box box-warning box-solid">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Purchase Report</h3>
+                        <h3 class="box-title">Purchase payment Report</h3>
                         <div class="box-tools pull-right">
                         	
                         </div>		
@@ -27,7 +27,7 @@
                     <div class="box-body">
                         <br>
                     	@include('includes.errormessage')
-                    	<form action="{{route('purchase.report')}}" method="get" class="form-horizontal" enctype="multipart/form-data">
+                    	<form action="{{route('purchase.payment.report')}}" method="get" class="form-horizontal" enctype="multipart/form-data">
                     		@csrf
                     		<div class="col-md-4">
                     			<div class="form-group">
@@ -67,35 +67,31 @@
                             
 	                        <div class="col-md-2">
 	                        	<label><br></label>
-	                        	<button type="submit" class="btn btn-sm btn-info form-control">Save</button>
+	                        	<button type="submit" class="btn btn-sm btn-warning form-control">Save</button>
 	                        </div>
                         </form>
 
-                        @if (isset ($purchase_report))
+                        @if (isset ($purchase_payment_report))
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                       <th style="width: 5%;">Sl.</th>
                                       <th style="width: 15%;">Date</th>
-                                      <th style="width: 15%;">User</th>
-                                      <th style="width: 15%;">Supplier</th>
-                                      <th style="width: 30%;">Note</th>
-                                      <th style="width: 10%;">Amount</th>
-                                      <th style="width: 10%;">Action</th>
+                                      <th style="width: 30%;">User</th>
+                                      <th style="width: 30%;">Supplier</th>
+                                      <th style="width: 10%;">Paid</th>
+                                      <th style="width: 10%;">Due</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($purchase_report as $value)
+                                    @foreach ($purchase_payment_report as $value)
                                         <tr>
                                           <td>{{$loop->index+1}}</td>
                                           <td>{{date('d M, Y', strtotime($value->date))}}</td>
                                           <td>{{$value->user}}</td>
                                           <td>{{$value->supplier}}</td>
-                                          <td>{{$value->note}}</td>
-                                          <td>{{$value->total}}</td>
-                                          <td>
-                                              <a href="{{route('purchases.show',$value->id)}}" class="btn btn-sm btn-info"><i class="fa fa-eye"></i></a>
-                                          </td>
+                                          <td>{{$value->paid}}</td>
+                                          <td>{{$value->due}}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>

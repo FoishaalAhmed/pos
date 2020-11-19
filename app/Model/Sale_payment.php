@@ -37,9 +37,17 @@ class Sale_payment extends Model
 
     ];
 
+    public static $validateSearchRule = [
+
+        'start_date'  => 'nullable|string|max:10',
+        'end_date'    => 'nullable|string|max:10',
+        'supplier_id' => 'numeric|nullable',
+    ];
+
     public function get_sale_payment_by_sale_id($sale_id)
     {
     	$sale_payment = DB::table('sale_payments')
+                                ->where('sale_payments.sale_id', $sale_id)
     							->select('sale_payments.id','sale_payments.date','sale_payments.invoice','sale_payments.paid','sale_payments.due')
                      			->get();
 
@@ -116,6 +124,46 @@ class Sale_payment extends Model
         } else {
 
             Session::flash('message', 'Sale Payment Delete Failed!');
+        }
+    }
+
+    public function get_sale_payment_report($start_date = '', $end_date = '', $customer_id = '')
+    {
+        $query = DB::table('sale_payments')
+                     ->leftJoin('customers', 'sale_payments.customer_id', '=', 'customers.id')
+                     ->leftJoin('users', 'sale_payments.user_id', '=', 'users.id');
+
+        if ($start_date != '' && $end_date != '') {
+
+            $query->where('sale_payments.date', '>=', $start_date);
+            $query->where('sale_payments.date', '<=', $end_date);
+        }
+
+        if ($customer_id != '') {
+            $query->where('sale_payments.customer_id', $customer_id);
+        }
+
+        $query->select('sale_payments.id','sale_payments.date','sale_payments.paid','sale_payments.due','users.name as user', 'customers.name as customer');
+
+        $result = $query->get();
+
+        return $result;
+    }
+
+    public function get_todays_sale_payment($today)
+    {
+        $sale_payments = DB::table('sale_payments')
+                     ->where('sale_payments.date', $today)
+                     ->groupBy('sale_payments.date')
+                     ->select(DB::raw('SUM(sale_payments.paid) as total_paid'));
+
+        if ($sale_payments->count() > 0) {
+
+            return $sale_payments->first();
+
+        } else{
+
+            return null;
         }
     }
 }

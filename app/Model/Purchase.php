@@ -26,6 +26,7 @@ class Purchase extends Model
         'date'                => 'required|string|max:10',
         'note'                => 'string|nullable',
         'invoice'             => 'required|string|max:50',
+        'supplier_id'         => 'numeric|required',
         'user_id'             => 'numeric|nullable',
         'extra_cost'          => 'numeric|nullable',
         'vat_percentage'      => 'numeric|nullable',
@@ -35,6 +36,13 @@ class Purchase extends Model
         'discount_percentage' => 'numeric|nullable',
         'discount'            => 'numeric|between:0,99999999999.99|nullable',
         'total'               => 'required|numeric|between:0,99999999999.99',
+    ];
+
+    public static $validateSearchRule = [
+
+        'start_date'  => 'nullable|string|max:10',
+        'end_date'    => 'nullable|string|max:10',
+        'supplier_id' => 'numeric|nullable',
     ];
 
     public function get_purchases()
@@ -63,7 +71,7 @@ class Purchase extends Model
 
         } else {
 
-            $supplier_id = $request->user_id;
+            $supplier_id = $request->supplier_id;
         }
 
         $subtotal = str_replace(',', '', Cart::subtotal());
@@ -158,16 +166,36 @@ class Purchase extends Model
 
         if ($start_date != '' && $end_date != '') {
 
-            $query->where('date', '>=', $start_date);
-            $query->where('date', '<=', $end_date);
+            $query->where('purchases.date', '>=', $start_date);
+            $query->where('purchases.date', '<=', $end_date);
         }
 
-        if ($supplier_id != '') $query->where('supplier_id', $supplier_id);
+        if ($supplier_id != '') {
+            $query->where('purchases.supplier_id', $supplier_id);
+        }
 
-        $query->select('purchases.id','purchases.date','purchases.subtotal','purchases.total','purchases.note','users.name as user', 'suppliers.name as supplier');
+        $query->select('purchases.id','purchases.date','purchases.total','purchases.note','users.name as user', 'suppliers.name as supplier');
 
         $result = $query->get();
 
         return $result;
+    }
+
+    public function get_todays_purchase($today)
+    {
+        $purchases = DB::table('purchases')
+                     ->where('purchases.deleted_at', '=', NULL)
+                     ->where('purchases.date', $today)
+                     ->groupBy('purchases.date')
+                     ->select(DB::raw('SUM(purchases.total) as total_purchase'));
+
+        if ($purchases->count() > 0) {
+
+            return $purchases->first();
+
+        } else{
+
+            return null;
+        }
     }
 }

@@ -1,6 +1,5 @@
  <footer class="main-footer">
-    <strong>Copyright &copy; 2017-{{Carbon\carbon::now()->year}} <a href="http://fb.com/Foishaal" target="_blank">Foisal Blog</a>.</strong> All rights
-    reserved.
+    <strong>Copyright &copy; 2020-{{Carbon\carbon::now()->year}} <a href="http://ictbanglabd.com/" target="_blank">ICT Bangla BD</a>.</strong> All rights reserved.
   </footer>
 <!-- ./wrapper -->
 

@@ -19,56 +19,98 @@
     <section class="content">
         <!-- Info boxes -->
         <div class="row">
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="info-box">
-                    <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
-                    <div class="info-box-content">
-                        <span class="info-box-text">CPU Traffic</span>
-                        <span class="info-box-number">90<small>%</small></span>
-                    </div>
-                    <!-- /.info-box-content -->
+            <div class="col-lg-3 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-aqua">
+                <div class="inner">
+                  <h3>@if ($today_purchase != null) {{$today_purchase->total_purchase}} @else {{'0'}} @endif ৳</h3>
+
+                  <p>Today's Purchase</p>
                 </div>
-                <!-- /.info-box -->
-            </div>
-            <!-- /.col -->
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="info-box">
-                    <span class="info-box-icon bg-red"><i class="fa fa-google-plus"></i></span>
-                    <div class="info-box-content">
-                        <span class="info-box-text">Likes</span>
-                        <span class="info-box-number">41,410</span>
-                    </div>
-                    <!-- /.info-box-content -->
+                <div class="icon">
+                  <i class="fa fa-money"></i>
                 </div>
-                <!-- /.info-box -->
+                <a href="{{route('purchases.index')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+              </div>
             </div>
-            <!-- /.col -->
-            <!-- fix for small devices only -->
-            <div class="clearfix visible-sm-block"></div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="info-box">
-                    <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
-                    <div class="info-box-content">
-                        <span class="info-box-text">Sales</span>
-                        <span class="info-box-number">760</span>
-                    </div>
-                    <!-- /.info-box-content -->
+            <!-- ./col -->
+            <div class="col-lg-3 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-green">
+                <div class="inner">
+                  <h3>@if ($today_sale != null) {{$today_sale->total_sale}} @else {{'0'}} @endif ৳</h3>
+
+                  <p>Today's Sale</p>
                 </div>
-                <!-- /.info-box -->
-            </div>
-            <!-- /.col -->
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="info-box">
-                    <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
-                    <div class="info-box-content">
-                        <span class="info-box-text">New Members</span>
-                        <span class="info-box-number">2,000</span>
-                    </div>
-                    <!-- /.info-box-content -->
+                <div class="icon">
+                  <i class="fa fa-money"></i>
                 </div>
-                <!-- /.info-box -->
+                <a href="{{route('sales.index')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+              </div>
             </div>
-            <!-- /.col -->
+            <!-- ./col -->
+            <div class="col-lg-3 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-yellow">
+                <div class="inner">
+                  <h3>@if ($today_purchase_payment != null) {{$today_purchase_payment->total_paid}} @else {{'0'}} @endif ৳</h3>
+
+                  <p>Today's Purchase Payment</p>
+                </div>
+                <div class="icon">
+                  <i class="fa fa-money"></i>
+                </div>
+                <a href="{{route('purchase-payments.index')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-red">
+                <div class="inner">
+                  <h3>@if ($today_sale_payment != null) {{$today_sale_payment->total_paid}} @else {{'0'}} @endif ৳</h3>
+
+                  <p>Today's Sale Payment</p>
+                </div>
+                <div class="icon">
+                  <i class="fa fa-money"></i>
+                </div>
+                <a href="{{route('sale-payments.index')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+            <!-- ./col -->
+        </div>
+        <!-- /.row -->
+        <!-- Info boxes -->
+        <div class="row">
+            <div class="col-lg-3 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-purple">
+                <div class="inner">
+                  <h3> {{$profit}} ৳</h3>
+
+                  <p>Today's Profit</p>
+                </div>
+                <div class="icon">
+                  <i class="fa fa-money"></i>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+            <div class="col-lg-3 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-teal">
+                <div class="inner">
+                  <h3> @if ($today_cost != null) {{$today_cost->total_amount}} @else {{'0'}} @endif ৳</h3>
+
+                  <p>Today's Cost</p>
+                </div>
+                <div class="icon">
+                  <i class="fa fa-money"></i>
+                </div>
+                <a href="{{route('costs.index')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
         </div>
         <!-- /.row -->
     </section>
