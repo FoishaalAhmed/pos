@@ -9,13 +9,14 @@ use Session;
 class Product extends Model
 {
     protected $fillable = [
-        'name', 'photo', 'description', 'vat', 'buy_price', 'sell_price', 'category_id',
+        'name', 'photo', 'description', 'product_code', 'vat', 'buy_price', 'sell_price', 'category_id',
     ];
 
     public static $validateStoreRule = [
 
         'photo'       => 'mimes:jpeg,jpg,png,gif|max:1999|nullable',
         'name'        => 'required|string|max:255',
+        'product_code'=> 'required|string|max:100',
         'description' => 'string|nullable',
         'vat'         => 'between:0,99.99|nullable',
         'buy_price'   => 'required|numeric',
@@ -32,6 +33,7 @@ class Product extends Model
         'buy_price'   => 'required|numeric',
         'sell_price'  => 'required|numeric',
         'category_id' => 'required|numeric',
+        'product_code'=> 'required|string|max:100',
     ];
 
     public function store_product($request)
@@ -51,10 +53,10 @@ class Product extends Model
 
     	$this->name        = $request->name;
         $this->description = $request->description;
-        $this->vat         = $request->vat;
         $this->buy_price   = $request->buy_price;
         $this->sell_price  = $request->sell_price;
         $this->category_id = $request->category_id;
+        $this->product_code = $request->product_code;
         $products          = $this->save();
 
         if ($products) {
@@ -88,10 +90,10 @@ class Product extends Model
 
     	$product->name        = $request->name;
         $product->description = $request->description;
-        $product->vat         = $request->vat;
         $product->buy_price   = $request->buy_price;
         $product->sell_price  = $request->sell_price;
         $product->category_id = $request->category_id;
+        $product->product_code = $request->product_code;
         $products             = $product->save();
 
         if ($products) {

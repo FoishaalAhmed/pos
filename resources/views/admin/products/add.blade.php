@@ -76,9 +76,9 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <div class="col-md-12">
-                                        <label class="control-label col-md-2">Vat</label>
+                                        <label class="control-label col-md-2">Code</label>
                                         <div class="col-sm-10">
-                                            <input name="vat" placeholder="Vat Percentage" class="form-control" type="text" value="{{ old('vat') }}">
+                                            <input name="product_code" placeholder="Product code" class="form-control" type="text" value="{{ old('product_code') }}">
                                         </div>
                                     </div>
                                 </div>

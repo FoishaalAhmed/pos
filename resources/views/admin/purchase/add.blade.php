@@ -127,7 +127,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
+                                {{-- <div class="col-md-4">
                                     <div class="form-group">
                                         <div class="col-md-12">
                                             <label for="">Product</label>
@@ -176,8 +176,75 @@
                                             <button class="btn btn-sm bg-purple form-control" type="button" id="addToCart">Add</button>
                                         </div>
                                     </div>
+                                </div> --}}
+                                {{-- <div id="table"></div> --}}
+
+                                <div class="col-md-12">
+
+                                <div class="form-group">
+
+                                    <table class="table" style="width: 100%;">
+
+                                        <tbody>
+
+                                            <input type="hidden" name="showrowid" id="showrowid" value="4">
+                                            <?php
+                                            
+                                            // 61 is the max limit, change to javascript also from botom of the code.
+
+                                            for ($i=1; $i < 11 ; $i++) { ?>
+                                                <tr id="trid<?= $i; ?>" style="<?php if($i > 3) echo 'display: none'; ?>">
+
+                                                    <td style="width: 20%">
+
+                                                        <input type="text" class="form-control" name="code[]" id="code<?= $i; ?>" placeholder="product code"  onfocusout="getProductDetails(<?= $i; ?>)">
+
+                                                    </td>
+
+                                                    <td style="width: 40%">
+
+                                                        <input type="text" class="form-control" id="name<?= $i; ?>" placeholder="product name">
+
+                                                        <input type="hidden" class="form-control" id="product_id<?= $i; ?>" placeholder="product name" name="product_id[]">
+
+                                                    </td>
+
+                                                    <td style="width: 15%">
+
+                                                        <input type="number" class="form-control" name="quantity[]" value="1" id="quantity<?= $i; ?>" placeholder="quantity" onkeyup="amountShow(<?= $i; ?>)">
+
+                                                    </td>
+
+                                                    <td style="width: 15%">
+
+                                                        <input type="number" step="0.01" class="form-control" name="rate[]" value="0" id="rate<?= $i; ?>" min="0" placeholder="rate" onkeyup="amountShow(<?= $i; ?>)">
+
+                                                    </td>
+
+                                                    <td style="width: 10%">
+
+                                                        <input type="number" step="0.01" class="form-control" name="price[]" value="0" id="total<?= $i; ?>" min="0" placeholder="total" readonly>
+
+                                                    </td>
+
+                                                </tr>
+
+                                            <?php } ?>
+
+                                            <tr>
+                                                <td colspan="4" style="text-align: right; font-size: 18px; font-weight: bold; width: 90%"> </td>
+                                                <td style="width: 10%">
+                                                    <input type="text" readonly id="total_amount_id" name="subtotal">
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+
+                                    </table>
+
                                 </div>
-                                <div id="table"></div>
+
+                            </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="box box-primary box-solid">
@@ -185,7 +252,7 @@
                                         <div class="form-group">
                                             <div class="col-md-12">
                                                 <label for="">Transport/Labour Cost</label>
-                                                <input type="text" name="extra_cost" class="form-control" id="extra_cost" placeholder="Transport/Labour Cost" value="0" onkeyup="calculateTotal();">
+                                                <input type="text" name="extra_cost" class="form-control" id="extra_cost" placeholder="Transport/Labour Cost" value="0" onkeyup="amountShow();">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -193,7 +260,7 @@
                                                 <label for="">Vat</label>
                                                 <br>
                                                 <div class="col-md-4">
-                                                    <input type="text" name="vat_percentage" class="form-control" id="vat_percentage" placeholder="Vat" value="0" onkeyup="calculateTotal();">
+                                                    <input type="text" name="vat_percentage" class="form-control" id="vat_percentage" placeholder="Vat" value="0" onkeyup="amountShow();">
                                                 </div>
                                                 <div class="col-md-2" style="border: 1px solid white; padding: 5px; text-align: center;">%</div>
                                                 <div class="col-md-6">
@@ -207,7 +274,7 @@
                                                 <label for="">Discount</label>
                                                 <br>
                                                 <div class="col-md-4">
-                                                    <input type="text" name="discount_percentage" class="form-control" id="discount_percentage" placeholder="Discount" value="0" onkeyup="calculateTotal();">
+                                                    <input type="text" name="discount_percentage" class="form-control" id="discount_percentage" placeholder="Discount" value="0" onkeyup="amountShow();">
                                                 </div>
                                                 <div class="col-md-2" style="border: 1px solid white; padding: 5px; text-align: center">%</div>
                                                 <div class="col-md-6">
@@ -225,7 +292,7 @@
                                         <div class="form-group">
                                             <div class="col-md-12">
                                                 <label for="">Paid</label>
-                                                <input type="text" name="paid" class="form-control" id="paid" placeholder="Paid" value="0" required="" onkeyup="calculateTotal();">
+                                                <input type="text" name="paid" class="form-control" id="paid" placeholder="Paid" value="0" required="" onkeyup="amountShow();">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -241,6 +308,7 @@
 	                        	<center>
 	                        		<button type="reset" class="btn btn-sm bg-red">Reset</button>
 	                        		<button type="submit" class="btn btn-sm bg-purple">Save</button>
+                                    <a class="btn btn-info" onclick="makerowvisible();"><i class="fa fa-plus"></i> </a>
 	                        	</center>
 	                        </div>
                         </form>
@@ -256,7 +324,8 @@
 @section('footerSection')
 
 <script>
-    $('#addToCart').click(function(){
+
+    /*$('#addToCart').click(function(){
 
         var product_id = $('#product_id').val();
         var quantity   = $('#quantity').val();
@@ -297,7 +366,7 @@
         });
     });
 
-    function calculateTotal() {  
+    function amountShow() {  
 
         var url = '{{route("cart.subtotal")}}';
 
@@ -343,7 +412,7 @@
 
 
         });
-    }
+    }*/
 
     $(function () {
         $('#date').datepicker({
@@ -375,6 +444,103 @@
 
         });
     });
+
+    function makerowvisible(){
+        
+        var nextrownumber = $("#showrowid").val();
+        $("#trid"+Number(nextrownumber)).show();
+        $("#showrowid").val(Number(nextrownumber)+1);
+    }
+
+    function getProductDetails(id) {
+        var productCode = $('#code' + id).val();
+
+        var url = '{{route("add.cart")}}';
+
+        $.ajaxSetup({
+
+            headers: {'X-CSRF-Token' : '{{csrf_token()}}'}
+
+        });
+
+        $.ajax({
+
+            url: url,
+            method: 'POST',
+            data: { 'productCode' : productCode, },
+
+            success: function(data2){
+
+                var data = JSON.parse(data2);
+                var quantity = $('#quantity' + id).val();
+
+                var total = data.buy_price * quantity;
+
+                $('#name' + id).val(data.name);
+                $('#product_id' + id).val(data.id);
+                $('#rate' + id).val(data.buy_price);
+                $('#total' + id).val(total);
+
+                var total_amount = 0;
+
+                // same as php for loop from up.
+
+                for(var i = 1; i < 11; i++){
+
+                    var tempamount = $('#total'+i).val(); 
+                    total_amount+= Number(tempamount);
+                }
+
+                $('#total_amount_id').val(total_amount);
+
+                //alert(data2);
+            },
+
+            error: function(error) {
+
+                console.log(error);
+            }
+
+
+        });
+    }
+
+    function amountShow(id) {
+
+        var quantity = $('#quantity' + id).val();
+        var rate     = $('#rate' + id).val();
+        var total    = quantity * rate ;
+
+        $('#total' + id).val(total);
+
+        var total_amount = 0;
+
+        // same as php for loop from up.
+
+        for(var i = 1; i < 11; i++){
+
+            var tempamount = $('#total'+i).val(); 
+            total_amount+= Number(tempamount);
+        }
+
+        $('#total_amount_id').val(total_amount);
+
+        var extra_cost     = $('#extra_cost').val();
+        var vat_percentage = $('#vat_percentage').val();
+        var vat            = (parseInt(total_amount) * parseInt(vat_percentage)) / 100;
+        $('#vat').val(vat);
+
+        var discount_percentage = $('#discount_percentage').val();
+        var discount            = (parseInt(total_amount) * parseInt(discount_percentage)) / 100;
+        $('#discount').val(discount);
+
+        var net_total = (parseInt(total_amount) + parseInt(vat) + parseInt(extra_cost)) - parseInt(discount);
+        $('#net_total').val(net_total);
+        var paid       = $('#paid').val();
+        var due       = parseInt(net_total) - parseInt(paid);
+
+        $('#due').val(due);
+    }
 
 
 </script>

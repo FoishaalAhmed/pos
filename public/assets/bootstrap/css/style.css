@@ -314,13 +314,13 @@
   border-top-color: teal!important;
 }
 
-input[type='number']{ 
+/*input[type='number']{ 
       -webkit-appearance:textfield; 
 }
 
 input[type='number'] {
     -moz-appearance:textfield;
-}
+}*/
 
 .select2-container .select2-selection--single {
 height: 34px !important;

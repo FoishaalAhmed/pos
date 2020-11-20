@@ -31,9 +31,9 @@
                                 <tr>
                                     <th style="width: 5%;">Sl.</th>
                                     <th style="width: 13%;">Name</th>
+                                    <th style="width: 13%;">Code</th>
                                     <th style="width: 10%;">Buy Price</th>
                                     <th style="width: 14%;">Sell Price</th>
-                                    <th style="width: 13%;">Vat</th>
                                     <th style="width: 22%;">Description</th>
                                     <th style="width: 10%;">Photo</th>
                                     <th style="width: 13%;">Action</th>
@@ -44,9 +44,9 @@
                                 <tr>
                                     <td>{{$loop->index + 1}}</td>
                                     <td>{{$product->name}}</td>
+                                    <td>{{$product->product_code}}</td>
                                     <td>{{$product->buy_price}}</td>
                                     <td>{{$product->sell_price}}</td>
-                                    <td>{{$product->vat}}</td>
                                     <td>{{$product->description}}</td>
                                     <td>
                                         <img src="{{asset($product->photo)}}" alt="" style="width: 50px; width: 50px;"> 

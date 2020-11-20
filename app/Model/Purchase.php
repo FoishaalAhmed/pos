@@ -74,13 +74,11 @@ class Purchase extends Model
             $supplier_id = $request->supplier_id;
         }
 
-        $subtotal = str_replace(',', '', Cart::subtotal());
-
         $this->date                = date('Y-m-d', strtotime($request->date));
         $this->invoice             = $request->invoice;
         $this->user_id             = $request->user_id;
         $this->supplier_id         = $supplier_id;
-        $this->subtotal            = $subtotal;
+        $this->subtotal            = $request->subtotal;
         $this->vat_percentage      = $request->vat_percentage;
         $this->vat                 = $request->vat;
         $this->extra_cost          = $request->extra_cost;
@@ -92,28 +90,29 @@ class Purchase extends Model
 
         $purchase_id               = $this->id;
 
+        foreach ($request->price as $key => $value) {
 
-        $cart = Cart::content();
-
-        foreach ($cart as $key => $value) {
+            if($value == 0 ) continue;
 
             $purchase_details = new Purchase_detail;
             $purchase_details->purchase_id = $purchase_id;
             $purchase_details->invoice     = $request->invoice;
-            $purchase_details->product_id  = $value->id;
-            $purchase_details->quantity    = $value->qty;
-            $purchase_details->rate        = $value->price;
-            $purchase_details->total       = $value->total;
+            $purchase_details->product_id  = $request->product_id[$key];
+            $purchase_details->quantity    = $request->quantity[$key];
+            $purchase_details->rate        = $request->rate[$key];
+            $purchase_details->total       = $value;
             $purchase_details->save();
         }
 
-        foreach ($cart as $key => $value) {
 
-            $Stock = new Stock;
-            $Stock->product_id  = $value->id;
-            $Stock->quantity    = $value->qty;
-            $Stock->unit        = $value->options->size;
-            $Stock->save();
+
+        foreach ($request->price as $key => $value) {
+            if($value == 0 ) continue;
+            $stock = new Stock;
+            $stock->product_id  = $request->product_id[$key];
+            $stock->quantity    = $request->quantity[$key];
+            //$stock->unit        = $value->options->size;
+            $stock->save();
         }
 
         $purchase_payments = new Purchase_payment;
@@ -127,9 +126,6 @@ class Purchase extends Model
         $purchase_payments->supplier_id    = $supplier_id;
 
         $purchase_payments->save();
-
-        Cart::destroy();
-
 
         if ($purchases) {
 
