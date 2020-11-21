@@ -198,8 +198,12 @@
           </div>
         </div>
         <!-- /.col -->
+        <div class="col-xs-12">
+            <a href="{{route('sales',$sale->id)}}" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
+        </div>
       </div>
       <!-- /.row -->
+
     </section>
     <!-- /.content -->
     <div class="clearfix"></div>

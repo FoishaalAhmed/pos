@@ -67,3 +67,23 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
 
 
 });
+
+// profile route 
+
+Route::group(['middleware' => 'auth'], function() {
+
+/** profile route start **/
+	Route::get('/profile', 'ProfileController@index')->name('profile');
+	Route::post('/profile', 'ProfileController@photo')->name('profile');
+	Route::post('/password', 'ProfileController@password')->name('password.change');
+	Route::post('/profile-update', 'ProfileController@update')->name('profile.update');
+/** profile route end **/
+
+/** print route start **/
+	Route::get('/sales/{id}', 'PrintController@sale')->name('sales');
+	Route::get('/purchase/{id}', 'PrintController@purchase')->name('purchases');
+/** print route end **/
+
+
+
+});

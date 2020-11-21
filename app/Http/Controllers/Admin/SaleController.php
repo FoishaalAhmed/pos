@@ -65,9 +65,9 @@ class SaleController extends Controller
     {
         $validateData = $request->validate(Sale::$validateStoreRule);
 
-        $this->sale_object->store_sale($request);
+        $sale_id = $this->sale_object->store_sale($request);
 
-        return redirect()->back();
+        return redirect(route('sales',$sale_id));
     }
 
     /**

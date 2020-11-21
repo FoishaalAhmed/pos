@@ -127,63 +127,25 @@
                                     </div>
                                 </div>
 
-                                {{-- <div class="col-md-4">
-                                    <div class="form-group">
-                                        <div class="col-md-12">
-                                            <label for="">Product</label>
-                                            <select id="product_id" class="form-control select2" style="width: 100%" required="">
-                                                <option value="">Select Products</option>
-                                                @foreach ($products as $product)
-                                                    <option value="{{$product->id}}">{{$product->name}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <div class="col-md-12">
-                                            <label for="">Quantity</label>
-                                            <input type="number" class="form-control" id="quantity" placeholder="purchase quantity" required="">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <div class="col-md-12">
-                                            <label for="">Unit</label>
-                                            <select id="total" class="form-control select2" style="width: 100%" required="">
-                                                <option value="">Select Units</option>
-                                                @foreach ($units as $unit)
-                                                    <option value="{{$unit->value}}">{{$unit->name}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <div class="col-md-12">
-                                            <label for="">Rate</label>
-                                            <input type="text" class="form-control" id="rate" placeholder="purchase rate" required="">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-1">
-                                    <div class="form-group">
-                                        <div class="col-md-12">
-                                            <label for=""><br></label>
-                                            <button class="btn btn-sm bg-purple form-control" type="button" id="addToCart">Add</button>
-                                        </div>
-                                    </div>
-                                </div> --}}
-                                {{-- <div id="table"></div> --}}
-
                                 <div class="col-md-12">
 
                                 <div class="form-group">
 
                                     <table class="table" style="width: 100%;">
+
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 20%;">Product code</th>
+
+                                                <th style="width: 30%;">Product name</th>
+
+                                                <th style="width: 10%;">Quantity</th>
+
+                                                <th style="width: 20%;">Price</th>
+
+                                                <th style="width: 20%;">Total</th>
+                                            </tr>
+                                        </thead>
 
                                         <tbody>
 
@@ -195,13 +157,13 @@
                                             for ($i=1; $i < 11 ; $i++) { ?>
                                                 <tr id="trid<?= $i; ?>" style="<?php if($i > 3) echo 'display: none'; ?>">
 
-                                                    <td style="width: 20%">
+                                                    <td>
 
                                                         <input type="text" class="form-control" name="code[]" id="code<?= $i; ?>" placeholder="product code"  onfocusout="getProductDetails(<?= $i; ?>)">
 
                                                     </td>
 
-                                                    <td style="width: 40%">
+                                                    <td>
 
                                                         <input type="text" class="form-control" id="name<?= $i; ?>" placeholder="product name">
 
@@ -209,19 +171,19 @@
 
                                                     </td>
 
-                                                    <td style="width: 15%">
+                                                    <td>
 
                                                         <input type="number" class="form-control" name="quantity[]" value="1" id="quantity<?= $i; ?>" placeholder="quantity" onkeyup="amountShow(<?= $i; ?>)">
 
                                                     </td>
 
-                                                    <td style="width: 15%">
+                                                    <td>
 
                                                         <input type="number" step="0.01" class="form-control" name="rate[]" value="0" id="rate<?= $i; ?>" min="0" placeholder="rate" onkeyup="amountShow(<?= $i; ?>)">
 
                                                     </td>
 
-                                                    <td style="width: 10%">
+                                                    <td>
 
                                                         <input type="number" step="0.01" class="form-control" name="price[]" value="0" id="total<?= $i; ?>" min="0" placeholder="total" readonly>
 
@@ -232,8 +194,8 @@
                                             <?php } ?>
 
                                             <tr>
-                                                <td colspan="4" style="text-align: right; font-size: 18px; font-weight: bold; width: 90%"> </td>
-                                                <td style="width: 10%">
+                                                <td colspan="4" style="text-align: right; font-size: 18px; font-weight: bold;"> Subtotal</td>
+                                                <td>
                                                     <input type="text" readonly id="total_amount_id" name="subtotal">
                                                 </td>
                                             </tr>

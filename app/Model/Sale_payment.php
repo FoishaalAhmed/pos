@@ -54,6 +54,17 @@ class Sale_payment extends Model
         return $sale_payment;
     }
 
+    public function get_total_sale_payment_by_sale_id($sale_id)
+    {
+        $sale_payment = DB::table('sale_payments')
+                                ->where('sale_payments.sale_id', $sale_id)
+                                ->groupBy('sale_payments.sale_id')
+                                ->select(DB::raw('SUM(sale_payments.paid) as total_paid'))
+                                ->first();
+
+        return $sale_payment;
+    }
+
     public function get_sale_payments()
     {
         $sale_payment = DB::table('sale_payments')

@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\QueryException;
 use Session;
 
 class User extends Authenticatable
@@ -80,8 +81,8 @@ class User extends Authenticatable
         'name'        => 'required|string|max:255',
         'username'    => 'required|string|max:255',
         'email'       => 'required|email|max:255',
-        'phone'       => 'numeric',
-        'address'     => 'required|string',
+        'phone'       => 'numeric|nullable',
+        'address'     => 'string|nullable',
 
     ];
 
@@ -183,6 +184,90 @@ class User extends Authenticatable
         } else {
 
             Session::flash('message', 'User Delete Failed!');
+        }
+        
+    }
+
+    
+
+    public function update_user_photo($request, $id)
+    {
+        $user  = $this::findOrFail($id);
+
+        $image = $request->file('photo');
+
+        if ($image) {
+
+            if(file_exists($user->photo)) unlink($user->photo);
+
+            $image_name      = rand();
+            $ext             = strtolower($image->getClientOriginalExtension());
+            $image_full_name = $image_name.'.'.$ext;
+            $upload_path     = 'public/images/users/';
+            $image_url       = $upload_path.$image_full_name;
+            $success         = $image->move($upload_path,$image_full_name);
+            $user->photo     = $image_url;
+        }
+
+        $user_update       = $user->save();
+
+        if ($user_update) {
+
+            Session::flash('message', 'User Photo Updated Successfully!');
+
+        } else {
+
+            Session::flash('message', 'User Photo Update Failed!');
+        }
+    }
+
+    public function update_user_password($request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        if (Hash::check($request->old_password, $user->password)) { 
+                $user->fill([
+
+                    'password' => Hash::make($request->new_password)
+
+                ])->save();
+
+                Session::flash('message', 'User Password Updated Successfully!');
+
+            } else {
+
+                Session::flash('message', 'User Password Updated Successfully!');
+            } 
+    }
+
+
+
+    public function update_user_info($request, $id)
+    {
+        try {
+
+            $user  = $this::findOrFail($id);
+        
+            $user->name     = $request->name;
+            $user->address  = $request->address;
+            $user->email    = $request->email;
+            $user->username = $request->username;
+            $user->phone    = $request->phone;
+
+            $user_update    = $user->save();
+
+            if ($user_update) {
+
+                Session::flash('message', 'User Info Updated Successfully!');
+
+            } else {
+
+                Session::flash('message', 'User Info Update Failed!');
+            }
+            
+        } catch (QueryException $exception) {
+            
+            Session::flash('message', 'Email Already Taken!');
         }
         
     }

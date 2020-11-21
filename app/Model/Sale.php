@@ -73,13 +73,13 @@ class Sale extends Model
             $customer_id = $request->customer_id;
         }
 
-        $subtotal = str_replace(',', '', Cart::subtotal());
+        //$subtotal = str_replace(',', '', Cart::subtotal());
 
         $this->date                = date('Y-m-d', strtotime($request->date));
         $this->invoice             = $request->invoice;
         $this->user_id             = $request->user_id;
         $this->customer_id         = $customer_id;
-        $this->subtotal            = $subtotal;
+        $this->subtotal            = $request->subtotal;
         $this->vat_percentage      = $request->vat_percentage;
         $this->vat                 = $request->vat;
         $this->extra_cost          = $request->extra_cost;
@@ -91,18 +91,17 @@ class Sale extends Model
 
         $sale_id                   = $this->id;
 
+        foreach ($request->price as $key => $value) {
 
-        $cart = Cart::content();
-
-        foreach ($cart as $key => $value) {
+            if($value == 0 ) continue;
 
             $sale_details = new Sale_detail;
             $sale_details->sale_id     = $sale_id;
             $sale_details->invoice     = $request->invoice;
-            $sale_details->product_id  = $value->id;
-            $sale_details->quantity    = $value->qty;
-            $sale_details->rate        = $value->price;
-            $sale_details->total       = $value->total;
+            $sale_details->product_id  = $request->product_id[$key];
+            $sale_details->quantity    = $request->quantity[$key];
+            $sale_details->rate        = $request->rate[$key];
+            $sale_details->total       = $value;
             $sale_details->save();
         }
 
@@ -118,8 +117,6 @@ class Sale extends Model
 
         $sale_payments->save();
 
-        Cart::destroy();
-
 
         if ($sales) {
 
@@ -129,6 +126,8 @@ class Sale extends Model
 
             Session::flash('message', 'Sale Create Failed!');
         }
+
+        return $sale_id;
     }
 
     public function delete_sale($id)

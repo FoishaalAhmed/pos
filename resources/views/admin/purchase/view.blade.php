@@ -197,6 +197,9 @@
           </div>
         </div>
         <!-- /.col -->
+        <div class="col-xs-12">
+            <a href="{{route('purchases',$purchase->id)}}" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
+        </div>
       </div>
       <!-- /.row -->
     </section>

@@ -64,6 +64,17 @@ class Purchase_payment extends Model
         return $purchase_payment;
     }
 
+    public function get_total_purchase_payment_by_purchase_id($purchase_id)
+    {
+        $purchase_payment = DB::table('purchase_payments')
+                                ->where('purchase_payments.purchase_id', $purchase_id)
+                                ->groupBy('purchase_payments.purchase_id')
+                                ->select(DB::raw('SUM(purchase_payments.paid) as total_paid'))
+                                ->first();
+
+        return $purchase_payment;
+    }
+
     public function store_purchase_payment($request)
     {
     	
