@@ -29,7 +29,7 @@
                         @include('includes.errormessage')
                         <form action="{{route('sales.store')}}" method="POST" class="form-horizontal" enctype="multipart/form-data">
                             @csrf
-                            <div class="col-md-12">
+                            <div class="col-md-9">
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <div class="col-md-12">
@@ -208,71 +208,60 @@
 
                             </div>
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-3">
                                 <div class="box box-primary box-solid">
                                     <div class="box-body box-profile">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <div class="col-md-12">
-                                                    <label for="">Transport/Labour Cost</label>
-                                                    <input type="text" name="extra_cost" class="form-control" id="extra_cost" placeholder="Transport/Labour Cost" value="0" onkeyup="amountShow();">
-                                                </div>
+                                        
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <label for="">Transport/Labour Cost</label>
+                                                <input type="text" name="extra_cost" class="form-control" id="extra_cost" placeholder="Transport/Labour Cost" value="0" onkeyup="amountShow();">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <div class="col-md-12">
-                                                    <label for="" style="margin-left: 15px;">Vat</label>
-                                                    <br>
-                                                    <div class="col-md-4">
-                                                        <input type="text" name="vat_percentage" class="form-control" id="vat_percentage" placeholder="Vat" value="0" onkeyup="amountShow();">
-                                                    </div>
-                                                    <div class="col-md-2" style="border: 1px solid white; padding: 5px; text-align: center;">%</div>
-                                                    <div class="col-md-6">
-                                                        <input type="text" name="vat" class="form-control" id="vat" placeholder="Vat" value="0" readonly="">
-                                                    </div>
-                                                    
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <label for="" style="margin-left: 15px;">Vat</label>
+                                                <br>
+                                                <div class="col-md-4">
+                                                    <input type="text" name="vat_percentage" class="form-control" id="vat_percentage" placeholder="Vat" value="0" onkeyup="amountShow();">
                                                 </div>
+                                                <div class="col-md-2" style="border: 1px solid white; padding: 5px; text-align: center;">%</div>
+                                                <div class="col-md-6">
+                                                    <input type="text" name="vat" class="form-control" id="vat" placeholder="Vat" value="0" readonly="">
+                                                </div>
+                                                
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <div class="col-md-12">
-                                                    <label for="" style="margin-left: 15px;">Discount</label>
-                                                    <br>
-                                                    <div class="col-md-4">
-                                                        <input type="text" name="discount_percentage" class="form-control" id="discount_percentage" placeholder="Discount" value="0" onkeyup="amountShow();">
-                                                    </div>
-                                                    <div class="col-md-2" style="border: 1px solid white; padding: 5px; text-align: center">%</div>
-                                                    <div class="col-md-6">
-                                                        <input type="text" name="discount" class="form-control" id="discount" placeholder="Discount" value="0" readonly="">
-                                                    </div>
-                                                    
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <label for="" style="margin-left: 15px;">Discount</label>
+                                                <br>
+                                                <div class="col-md-4">
+                                                    <input type="text" name="discount_percentage" class="form-control" id="discount_percentage" placeholder="Discount" value="0" onkeyup="amountShow();">
                                                 </div>
+                                                <div class="col-md-2" style="border: 1px solid white; padding: 5px; text-align: center">%</div>
+                                                <div class="col-md-6">
+                                                    <input type="text" name="discount" class="form-control" id="discount" placeholder="Discount" value="0" readonly="">
+                                                </div>
+                                                
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <div class="col-md-12">
-                                                    <label for="">Total</label>
-                                                    <input type="text" name="total" class="form-control" id="net_total" placeholder="Total" value="0" required="" readonly="">
-                                                </div>
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <label for="">Total</label>
+                                                <input type="text" name="total" class="form-control" id="net_total" placeholder="Total" value="0" required="" readonly="">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <div class="col-md-12">
-                                                    <label for="">Paid</label>
-                                                    <input type="text" name="paid" class="form-control" id="paid" placeholder="Paid" value="0" required="" onkeyup="amountShow();">
-                                                </div>
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <label for="">Paid</label>
+                                                <input type="text" name="paid" class="form-control" id="paid" placeholder="Paid" value="0" required="" onkeyup="amountShow();">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <div class="col-md-12">
-                                                    <label for="">Due</label>
-                                                    <input type="text" name="due" class="form-control" id="due" placeholder="Due" value="0" required="" readonly="">
-                                                </div>
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <label for="">Due</label>
+                                                <input type="text" name="due" class="form-control" id="due" placeholder="Due" value="0" required="" readonly="">
                                             </div>
                                         </div>
                                     </div>
